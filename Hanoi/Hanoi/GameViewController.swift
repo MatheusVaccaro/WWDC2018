@@ -31,21 +31,19 @@ class GameViewController: UIViewController {
         MovementSequencer.shared.towerOfHanoi = towerOfHanoi
         
         let moves: [Movement] = [
+//            .moveTopDisk(from: 1, to: 3),
+//            .moveTopDisk(from: 1, to: 2),
+//            .moveTopDisk(from: 3, to: 2),
+//            .moveTopDisk(from: 1, to: 3),
+//            .moveTopDisk(from: 2, to: 1),
+//            .moveTopDisk(from: 2, to: 3),
+//            .moveTopDisk(from: 1, to: 3)
+            
             .moveTopDisk(from: 1, to: 3),
-            .moveTopDisk(from: 1, to: 2),
-            .moveTopDisk(from: 3, to: 2),
             .moveTopDisk(from: 1, to: 3),
-            .moveTopDisk(from: 2, to: 1),
-            .moveTopDisk(from: 2, to: 3),
-            .moveTopDisk(from: 1, to: 3)
         ]
         
         MovementSequencer.shared.execute(movements: moves)
-        
-        // MARK: Greatest Gambi Ever Made
-        let uselessNode = SCNNode()
-        scnScene.rootNode.addChildNode(uselessNode)
-        uselessNode.runAction(SCNAction.repeatForever(SCNAction.wait(duration: 1)))
         
         // add a tap gesture recognizer
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
@@ -79,6 +77,8 @@ class GameViewController: UIViewController {
         scnView.showsStatistics = true
         scnView.allowsCameraControl = true
         scnView.autoenablesDefaultLighting = true
+        self.scnView.isPlaying = true
+        
     }
     
     private func setupScene() {
@@ -98,10 +98,10 @@ class GameViewController: UIViewController {
         // check that we clicked on at least one object
         if hitResults.count > 0 {
             // retrieved the first clicked object
-            let result = hitResults[0]
+            guard let result = hitResults[0].node as? Hitbox, !MovementSequencer.shared.isExecuting else { return }
             
             // get its material
-            let material = result.node.geometry!.firstMaterial!
+            let material = result.geometry!.firstMaterial!
             
             // highlight it
             SCNTransaction.begin()

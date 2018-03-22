@@ -28,14 +28,13 @@ class TowerOfHanoi {
         self.pegs = pegs
         
         place(numberOfDisks: nDisks, atPeg: initialPeg)
-    
     }
     
-    func moveTopDisk(fromPeg sourcePegIndex: Int, toPeg targetPegIndex: Int, duration: TimeInterval = 1.0, completionHandler: (() -> Void)? = nil) {
+    func moveTopDisk(fromPeg sourcePegIndex: Int, toPeg targetPegIndex: Int, completionHandler: (() -> Void)? = nil) {
         let sourcePeg = pegs[sourcePegIndex - 1]
         let targetPeg = pegs[targetPegIndex - 1]
         
-        sourcePeg.moveTopDisk(to: targetPeg, duration: duration) {
+        sourcePeg.moveTopDisk(to: targetPeg) {
             completionHandler?()
         }
     }

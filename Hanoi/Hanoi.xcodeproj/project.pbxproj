@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C2356562206406B5002F4C67 /* Hitbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2356561206406B5002F4C67 /* Hitbox.swift */; };
 		C25A2088205F627400633515 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25A2087205F627400633515 /* AppDelegate.swift */; };
 		C25A208A205F627400633515 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = C25A2089205F627400633515 /* art.scnassets */; };
 		C25A208C205F627400633515 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25A208B205F627400633515 /* GameViewController.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C2356561206406B5002F4C67 /* Hitbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hitbox.swift; sourceTree = "<group>"; };
 		C25A2084205F627400633515 /* Hanoi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hanoi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C25A2087205F627400633515 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C25A2089205F627400633515 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				C25A20A3206167EE00633515 /* Peg.swift */,
 				C25A20A52062D0CD00633515 /* Base.swift */,
 				C25A20A72062E58000633515 /* MovementQueue.swift */,
+				C2356561206406B5002F4C67 /* Hitbox.swift */,
 			);
 			path = Hanoi;
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 				C25A20A4206167EE00633515 /* Peg.swift in Sources */,
 				C25A20A82062E58000633515 /* MovementQueue.swift in Sources */,
 				C25A2088205F627400633515 /* AppDelegate.swift in Sources */,
+				C2356562206406B5002F4C67 /* Hitbox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

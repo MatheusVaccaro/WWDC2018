@@ -13,22 +13,33 @@ class MovementSequencer {
     static let shared = MovementSequencer()
     var towerOfHanoi: TowerOfHanoi?
     var movementQueue: [Movement]
+    private(set) var isExecuting: Bool
     
     private init() {
         self.movementQueue = []
+        self.isExecuting = false
     }
     
     func execute(movements: [Movement]) {
+        self.isExecuting = true
+        _execute(movements: movements)
+        
+    }
+    
+    
+    private func _execute(movements: [Movement]) {
         self.movementQueue = movements
-        guard let movement = movements.first, let towerOfHanoi = self.towerOfHanoi else { return }
+        guard let movement = movements.first, let towerOfHanoi = self.towerOfHanoi else {
+            isExecuting = false
+            return
+        }
         self.movementQueue.remove(at: 0)
         switch movement {
         case let .moveTopDisk(from: sourcePeg,to: targetPeg):
             towerOfHanoi.moveTopDisk(fromPeg: sourcePeg,
                                      toPeg: targetPeg,
-                                     duration: 1.0,
                                      completionHandler: { [unowned self] in
-                                        self.execute(movements: self.movementQueue)
+                                        self._execute(movements: self.movementQueue)
             })
             
         }
