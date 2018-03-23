@@ -13,7 +13,7 @@ class TowerOfHanoi {
     let node: SCNNode
     let pegs: [Peg]
     
-    init(numberOfDisks nDisks: Int, numberOfPegs nPegs: Int, initialPeg: Int = 1) {
+    init(numberOfDisks nDisks: Int, numberOfPegs nPegs: Int, initialPeg: Int = 0) {
         self.node = SCNNode()
         
         let base = Base(forNumberOfDisks: nDisks, numberOfPegs: nPegs)
@@ -31,8 +31,8 @@ class TowerOfHanoi {
     }
     
     func moveTopDisk(fromPeg sourcePegIndex: Int, toPeg targetPegIndex: Int, completionHandler: (() -> Void)? = nil) {
-        let sourcePeg = pegs[sourcePegIndex - 1]
-        let targetPeg = pegs[targetPegIndex - 1]
+        let sourcePeg = pegs[sourcePegIndex]
+        let targetPeg = pegs[targetPegIndex]
         
         sourcePeg.moveTopDisk(to: targetPeg) {
             completionHandler?()
@@ -40,10 +40,10 @@ class TowerOfHanoi {
     }
     
     private func place(numberOfDisks nDisks: Int, atPeg pegIndex: Int) {
-        let peg = pegs[pegIndex - 1]
-        let range = (1...nDisks).reversed()
+        let peg = pegs[pegIndex]
+        let range = (0..<nDisks).reversed()
         for diskNumber in range {
-            let disk = Disk(outerRadius: CGFloat(diskNumber))
+            let disk = Disk(outerRadius: CGFloat(diskNumber + 1))
             let positionVector: SCNVector3
             if peg.diskStack.isEmpty {
                 positionVector = SCNVector3(peg.node.position.x, peg.relativeMinY + Float(disk.height / 2), peg.node.position.z)

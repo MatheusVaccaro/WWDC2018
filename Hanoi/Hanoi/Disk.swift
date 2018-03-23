@@ -16,6 +16,18 @@ class Disk {
     let color: UIColor
     let height: CGFloat = Disk.height
     
+    var isSelected: Bool {
+        didSet {
+            if oldValue != isSelected {
+                if isSelected {
+                    addParticles()
+                } else {
+                    removeParticles()
+                }
+            }
+        }
+    }
+    
     static let height: CGFloat = 1
     static let innerRadius: CGFloat = Peg.outerRadius
     
@@ -27,6 +39,7 @@ class Disk {
     }
     
     init(outerRadius: CGFloat, color: UIColor? = nil) {
+        self.isSelected = false
         self.outerRadius = outerRadius
         
         if let color = color {
@@ -56,12 +69,22 @@ class Disk {
             return UIColor.blue
         case 6...7:
             return UIColor.magenta
-        case 7...8:
-            return UIColor.brown
-        case 8...9:
-            return UIColor.gray
         default:
-            return UIColor.black
+            return UIColor.random()
         }
+    }
+    
+    private func addParticles() {
+        let bokehParticleSystem = SCNParticleSystem(named: "BokehParticleSystem.scnp", inDirectory: nil)
+        bokehParticleSystem?.particleColor = self.color
+        bokehParticleSystem?.emitterShape = self.node.geometry
+        
+        if let emitter = bokehParticleSystem {
+            self.node.addParticleSystem(emitter)
+        }
+    }
+    
+    private func removeParticles() {
+        self.node.removeAllParticleSystems()
     }
 }

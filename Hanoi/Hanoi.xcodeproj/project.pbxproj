@@ -21,6 +21,9 @@
 		C25A20A4206167EE00633515 /* Peg.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25A20A3206167EE00633515 /* Peg.swift */; };
 		C25A20A62062D0CD00633515 /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25A20A52062D0CD00633515 /* Base.swift */; };
 		C25A20A82062E58000633515 /* MovementQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25A20A72062E58000633515 /* MovementQueue.swift */; };
+		C27CB03420646D7000B12AB6 /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = C27CB03220646D7000B12AB6 /* bokeh.png */; };
+		C27CB03520646D7000B12AB6 /* BokehParticleSystem.scnp in Resources */ = {isa = PBXBuildFile; fileRef = C27CB03320646D7000B12AB6 /* BokehParticleSystem.scnp */; };
+		C27CB03720651DE300B12AB6 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27CB03620651DE300B12AB6 /* HUD.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,9 @@
 		C25A20A3206167EE00633515 /* Peg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Peg.swift; sourceTree = "<group>"; };
 		C25A20A52062D0CD00633515 /* Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
 		C25A20A72062E58000633515 /* MovementQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementQueue.swift; sourceTree = "<group>"; };
+		C27CB03220646D7000B12AB6 /* bokeh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bokeh.png; sourceTree = "<group>"; };
+		C27CB03320646D7000B12AB6 /* BokehParticleSystem.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = BokehParticleSystem.scnp; sourceTree = "<group>"; };
+		C27CB03620651DE300B12AB6 /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +93,9 @@
 				C25A20A52062D0CD00633515 /* Base.swift */,
 				C25A20A72062E58000633515 /* MovementQueue.swift */,
 				C2356561206406B5002F4C67 /* Hitbox.swift */,
+				C27CB03220646D7000B12AB6 /* bokeh.png */,
+				C27CB03320646D7000B12AB6 /* BokehParticleSystem.scnp */,
+				C27CB03620651DE300B12AB6 /* HUD.swift */,
 			);
 			path = Hanoi;
 			sourceTree = "<group>";
@@ -150,6 +159,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C27CB03520646D7000B12AB6 /* BokehParticleSystem.scnp in Resources */,
+				C27CB03420646D7000B12AB6 /* bokeh.png in Resources */,
 				C25A208A205F627400633515 /* art.scnassets in Resources */,
 				C25A2094205F627400633515 /* LaunchScreen.storyboard in Resources */,
 				C25A2091205F627400633515 /* Assets.xcassets in Resources */,
@@ -170,6 +181,7 @@
 				C25A20A0206167B900633515 /* Stack.swift in Sources */,
 				C25A208C205F627400633515 /* GameViewController.swift in Sources */,
 				C25A209C2060265A00633515 /* TowerOfHanoi.swift in Sources */,
+				C27CB03720651DE300B12AB6 /* HUD.swift in Sources */,
 				C25A20A4206167EE00633515 /* Peg.swift in Sources */,
 				C25A20A82062E58000633515 /* MovementQueue.swift in Sources */,
 				C25A2088205F627400633515 /* AppDelegate.swift in Sources */,

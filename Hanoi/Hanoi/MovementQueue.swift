@@ -9,19 +9,28 @@
 import Foundation
 import SceneKit
 
+protocol MovementSequencerDelegate {
+    func didExecuteMovement(_ movement: Movement)
+}
+
 class MovementSequencer {
     static let shared = MovementSequencer()
     var towerOfHanoi: TowerOfHanoi?
     var movementQueue: [Movement]
+    var delegate: MovementSequencerDelegate?
+    
     private(set) var isExecuting: Bool
+    
+    private var completionHandler: (() -> Void)?
     
     private init() {
         self.movementQueue = []
         self.isExecuting = false
     }
     
-    func execute(movements: [Movement]) {
+    func execute(movements: [Movement], completionHandler: (() -> Void)? = nil) {
         self.isExecuting = true
+        self.completionHandler = completionHandler
         _execute(movements: movements)
         
     }
@@ -31,6 +40,7 @@ class MovementSequencer {
         self.movementQueue = movements
         guard let movement = movements.first, let towerOfHanoi = self.towerOfHanoi else {
             isExecuting = false
+            self.completionHandler?()
             return
         }
         self.movementQueue.remove(at: 0)
@@ -39,6 +49,7 @@ class MovementSequencer {
             towerOfHanoi.moveTopDisk(fromPeg: sourcePeg,
                                      toPeg: targetPeg,
                                      completionHandler: { [unowned self] in
+                                        self.delegate?.didExecuteMovement(.moveTopDisk(from: sourcePeg, to: targetPeg))
                                         self._execute(movements: self.movementQueue)
             })
             

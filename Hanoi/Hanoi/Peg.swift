@@ -12,7 +12,22 @@ import SceneKit
 class Peg {
     let node: SCNNode
     let height: CGFloat
+    let index: Int
     var diskStack: Stack<Disk>
+    
+    var isSelected: Bool {
+        didSet {
+            if oldValue != isSelected {
+                if isSelected {
+                    activateSelection()
+                } else {
+                    deactivateSelection()
+                }
+            }
+        }
+    }
+    
+    private var selectedDisk: Disk?
     
     private let expectedMaxNumberOfDisks: Int
     private var pegSectionWidth: CGFloat {
@@ -33,7 +48,9 @@ class Peg {
     }
     
     init(forNumberOfDisks nDisks: Int, base: Base, index: Int) {
+        self.isSelected = false
         self.expectedMaxNumberOfDisks = nDisks
+        self.index = index
         self.height = CGFloat(nDisks) + Peg.heightModifier
         self.diskStack = Stack()
         
@@ -54,6 +71,7 @@ class Peg {
 
         guard let topDisk = diskStack.peek() else {
             print("Error. Could not get top disk.")
+            completionHandler?()
             return
         }
         
@@ -76,21 +94,21 @@ class Peg {
         let duration = defaultDuration * durationMultiplier
         
         let heightOffset: Float = 2
-        let liftUpVector = SCNVector3(node.position.x, relativeMaxY + heightOffset, node.position.z)
-        let liftUpAction = SCNAction.move(to: liftUpVector, duration: duration)
+        let liftVector = SCNVector3(node.position.x, relativeMaxY + heightOffset, node.position.z)
+        let liftAction = SCNAction.move(to: liftVector, duration: duration)
         
         let moveVector = SCNVector3(destination.node.position.x, destination.relativeMaxY + heightOffset, destination.node.position.z)
         let moveAction = SCNAction.move(to: moveVector, duration: duration)
         
-        let liftDownVector: SCNVector3
+        let lowerVector: SCNVector3
         let diskOffset = Float(disk.height / 2)
         if destination.diskStack.isEmpty {
-            liftDownVector = SCNVector3(destination.node.position.x, destination.relativeMinY + diskOffset , destination.node.position.z)
+            lowerVector = SCNVector3(destination.node.position.x, destination.relativeMinY + diskOffset , destination.node.position.z)
         } else {
             let destinationTopDisk = destination.diskStack.peek()!
-            liftDownVector = SCNVector3(destination.node.position.x, destinationTopDisk.relativeMaxY + diskOffset, destination.node.position.z)
+            lowerVector = SCNVector3(destination.node.position.x, destinationTopDisk.relativeMaxY + diskOffset, destination.node.position.z)
         }
-        let liftDownAction = SCNAction.move(to: liftDownVector, duration: duration)
+        let lowerAction = SCNAction.move(to: lowerVector, duration: duration)
         
         
         let removeDiskFromSourceAndAddToDestinationAction = SCNAction.run { _ in
@@ -98,7 +116,7 @@ class Peg {
             destination.diskStack.push(disk)
         }
         
-        let actionSequence = SCNAction.sequence([liftUpAction, moveAction, liftDownAction, removeDiskFromSourceAndAddToDestinationAction])
+        let actionSequence = SCNAction.sequence([liftAction, moveAction, lowerAction, removeDiskFromSourceAndAddToDestinationAction])
     
         return actionSequence
     }
@@ -112,8 +130,8 @@ class Peg {
         
         
         let heightOffset: Float = 2
-        let liftUpSourceVector = SCNVector3(node.position.x, relativeMaxY + heightOffset, node.position.z)
-        let liftUpSourceAction = SCNAction.move(to: liftUpSourceVector, duration: duration)
+        let sourceLiftVector = SCNVector3(node.position.x, relativeMaxY + heightOffset, node.position.z)
+        let sourceLiftAction = SCNAction.move(to: sourceLiftVector, duration: duration)
         
         let moveVector = SCNVector3(destination.node.position.x, destination.relativeMaxY + heightOffset, destination.node.position.z)
         let moveAction = SCNAction.move(to: moveVector, duration: duration)
@@ -130,17 +148,19 @@ class Peg {
         let shakeRightAction = SCNAction.moveBy(x: +0.5, y: 0, z: 0, duration: shakeDuration)
         let shakeAction = SCNAction.sequence([shakeLeftAction, goToMiddle, shakeRightAction, goToMiddle, shakeLeftAction, goToMiddle])
         
-        let liftUpDestinationVector = SCNVector3(destination.node.position.x, destination.relativeMaxY + heightOffset, destination.node.position.z)
-        let liftUpDestinationAction = SCNAction.move(to: liftUpDestinationVector, duration: duration)
+        let destinationLiftVector = SCNVector3(destination.node.position.x, destination.relativeMaxY + heightOffset, destination.node.position.z)
+        let destinationLiftAction = SCNAction.move(to: destinationLiftVector, duration: duration)
         
-        let initialDiskPosition = disk.node.position
+        // -height because the disk was lifted by it's height
+        let initialDiskPosition = SCNVector3(disk.node.position.x, disk.node.position.y - Float(disk.height), disk.node.position.z)
+//        let initialDiskPosition = disk.node.position
         let moveBackVector = SCNVector3(initialDiskPosition.x, relativeMaxY + heightOffset, initialDiskPosition.z)
         let moveBackAction = SCNAction.move(to: moveBackVector, duration: duration)
         
-        let liftDownSourceVector = SCNVector3(initialDiskPosition.x, initialDiskPosition.y, initialDiskPosition.z)
-        let liftDownSourceAction = SCNAction.move(to: liftDownSourceVector, duration: duration)
+        let destinationLowerVector = SCNVector3(initialDiskPosition.x, initialDiskPosition.y, initialDiskPosition.z)
+        let destinationLowerAction = SCNAction.move(to: destinationLowerVector, duration: duration)
         
-        let actionSequence = SCNAction.sequence([liftUpSourceAction, moveAction, liftDownDestinationAction, waitAction, shakeAction, waitAction, liftUpDestinationAction, moveBackAction, liftDownSourceAction])
+        let actionSequence = SCNAction.sequence([sourceLiftAction, moveAction, liftDownDestinationAction, waitAction, shakeAction, waitAction, destinationLiftAction, moveBackAction, destinationLowerAction])
         
         return actionSequence
     }
@@ -150,6 +170,31 @@ class Peg {
     
         let positionVector = SCNVector3(pegSectionInitialX + pegSectionWidth * CGFloat(index), CGFloat(base.relativeMaxY) + (height / 2), CGFloat(0))
         node.position = positionVector
+    }
+    
+    private func activateSelection() {
+        guard let topDisk = diskStack.peek() else { return }
+        self.selectedDisk = topDisk
+        let defaultDuration: TimeInterval = 0.1
+        
+        let liftAction = SCNAction.moveBy(x: 0, y: topDisk.height, z: 0, duration: defaultDuration)
+        let selectDiskAction = SCNAction.run( { _ in
+            topDisk.isSelected = true
+        })
+        let actionSequence = SCNAction.sequence([selectDiskAction, liftAction])
+        topDisk.node.runAction(actionSequence)
+    }
+    
+    private func deactivateSelection() {
+        guard let selectedDisk = self.selectedDisk else { return }
+        let defaultDuration: TimeInterval = 0.1
+        
+        let lowerAction = SCNAction.moveBy(x: 0, y: -selectedDisk.height, z: 0, duration: defaultDuration)
+        let unselectDiskAction = SCNAction.run( { _ in
+            selectedDisk.isSelected = false
+        })
+        let actionSequence = SCNAction.sequence([lowerAction, unselectDiskAction])
+        selectedDisk.node.runAction(actionSequence)
     }
 }
 
