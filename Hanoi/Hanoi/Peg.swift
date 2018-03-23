@@ -55,7 +55,7 @@ class Peg {
         self.diskStack = Stack()
         
         let tube = SCNTube(innerRadius: Peg.innerRadius, outerRadius: Peg.outerRadius, height: height)
-        tube.firstMaterial?.diffuse.contents = "art.scnassets/woodTexture"
+        tube.firstMaterial?.diffuse.contents = "art.scnassets/woodTexture.png"
         self.node = SCNNode(geometry: tube)
         
         positionAt(base: base, index: index)

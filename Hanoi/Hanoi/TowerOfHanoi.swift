@@ -10,13 +10,18 @@ import Foundation
 import SceneKit
 
 class TowerOfHanoi {
+    let base: Base
     let node: SCNNode
     let pegs: [Peg]
+    let initialPegIndex: Int
+    let numberOfDisks: Int
     
-    init(numberOfDisks nDisks: Int, numberOfPegs nPegs: Int, initialPeg: Int = 0) {
+    init(numberOfDisks nDisks: Int, numberOfPegs nPegs: Int, initialPegIndex: Int = 0) {
         self.node = SCNNode()
+        self.initialPegIndex = initialPegIndex
+        self.numberOfDisks = nDisks
         
-        let base = Base(forNumberOfDisks: nDisks, numberOfPegs: nPegs)
+        self.base = Base(forNumberOfDisks: nDisks, numberOfPegs: nPegs)
         node.addChildNode(base.node)
         
         var pegs: [Peg] = []
@@ -27,7 +32,7 @@ class TowerOfHanoi {
         }
         self.pegs = pegs
         
-        place(numberOfDisks: nDisks, atPeg: initialPeg)
+        place(numberOfDisks: nDisks, atPeg: initialPegIndex)
     }
     
     func moveTopDisk(fromPeg sourcePegIndex: Int, toPeg targetPegIndex: Int, completionHandler: (() -> Void)? = nil) {

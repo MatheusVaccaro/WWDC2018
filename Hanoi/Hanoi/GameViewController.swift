@@ -27,26 +27,33 @@ class GameViewController: UIViewController {
     }
     
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setup()
+    }
     
     
     var scnView: SCNView!
     var scnScene: SCNScene!
     var cameraNode: SCNNode!
+    var hud: Hud!
     
     var towerOfHanoi: TowerOfHanoi!
-
+    var towerOfHanoiChecker: TowerOfHanoiChecker!
+    
     var sourcePeg: Peg?
     var targetPeg: Peg?
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    private func setup() {
         setupView()
         setupScene()
+        setupTowerOfHanoi(numberOfDisks: 5, numberOfPegs: 3)
+        setupTowerOfHanoiChecker()
         setupCamera()
+        setupHud()
+        setupTapRecognizer()
         
-        self.towerOfHanoi = TowerOfHanoi(numberOfDisks: 3, numberOfPegs: 3)
-        scnScene.rootNode.addChildNode(towerOfHanoi.node)
+        
         
         MovementSequencer.shared.delegate = self
         MovementSequencer.shared.towerOfHanoi = towerOfHanoi
@@ -61,20 +68,7 @@ class GameViewController: UIViewController {
             .moveTopDisk(from: 0, to: 2)
         ]
         
-        MovementSequencer.shared.execute(movements: moves)
-        
-        // add a tap gesture recognizer
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-        scnView.addGestureRecognizer(tapGesture)
-        
-    }
-    
-    
-    private func setupCamera() {
-        cameraNode = SCNNode()
-        cameraNode.camera = SCNCamera()
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 30)
-        scnScene.rootNode.addChildNode(cameraNode)
+        //        MovementSequencer.shared.execute(movements: moves)
     }
     
     private func setupView() {
@@ -83,13 +77,41 @@ class GameViewController: UIViewController {
         scnView.allowsCameraControl = true
         scnView.autoenablesDefaultLighting = true
         scnView.isPlaying = true
-        
     }
     
     private func setupScene() {
         scnScene = SCNScene()
         scnView.scene = scnScene
         scnView.backgroundColor = .black
+    }
+    
+    private func setupHud() {
+        self.hud = Hud(size: scnView.bounds.size)
+        scnView.overlaySKScene = self.hud
+    }
+    
+    private func setupTowerOfHanoi(numberOfDisks nDisks: Int, numberOfPegs nPegs: Int) {
+        self.towerOfHanoi = TowerOfHanoi(numberOfDisks: nDisks, numberOfPegs: nPegs)
+        scnScene.rootNode.addChildNode(towerOfHanoi.node)
+    }
+    
+    private func setupTowerOfHanoiChecker() {
+        self.towerOfHanoiChecker = TowerOfHanoiChecker(towerOfHanoi: self.towerOfHanoi)
+    }
+    
+    private func setupCamera() {
+        cameraNode = SCNNode()
+        cameraNode.camera = SCNCamera()
+        cameraNode.position = SCNVector3(x: 0, y: 0, z: 30)
+//        let lookAtTowerOfHanoiConstraint = SCNLookAtConstraint(target: towerOfHanoi.node)
+//        cameraNode.constraints = [lookAtTowerOfHanoiConstraint]
+        
+        scnScene.rootNode.addChildNode(cameraNode)
+    }
+    
+    private func setupTapRecognizer() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        scnView.addGestureRecognizer(tapGesture)
     }
     
     @objc
@@ -167,11 +189,11 @@ class GameViewController: UIViewController {
 
 extension GameViewController: MovementSequencerDelegate {
     func didExecuteMovement(_ movement: Movement) {
-        switch movement {
-        case let .moveTopDisk(from: sourcePegIndex, to: targetPegIndex):
-            print("moved disk from peg \(sourcePegIndex) to peg \(targetPegIndex)")
-        default:
-            break
-        }
+        print("Puzzle status: \(towerOfHanoiChecker.check())")
+        
+    }
+    
+    func willExecuteMovement(_ movement: Movement) {
+        hud.numberOfMoves += 1
     }
 }

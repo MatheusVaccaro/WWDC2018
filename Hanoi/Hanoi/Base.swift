@@ -30,7 +30,7 @@ class Base {
         self.length = (CGFloat(nDisks * 2) + Disk.innerRadius)
         
         let base = SCNBox(width: width, height: height, length: length, chamferRadius: 0)
-        base.firstMaterial?.diffuse.contents = "art.scnassets/woodTexture"
+        base.firstMaterial?.diffuse.contents = "art.scnassets/woodTexture.png"
         self.node = SCNNode(geometry: base)
     }
     
