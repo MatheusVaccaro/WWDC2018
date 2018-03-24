@@ -27,6 +27,8 @@
 		C27CB0392065636000B12AB6 /* CustomScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27CB0382065636000B12AB6 /* CustomScene.swift */; };
 		C27CB03B2065772400B12AB6 /* TowerOfHanoiChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27CB03A2065772400B12AB6 /* TowerOfHanoiChecker.swift */; };
 		C27CB03D206586C800B12AB6 /* NumberOfMovesIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27CB03C206586C800B12AB6 /* NumberOfMovesIndicator.swift */; };
+		C27CB0402065AE3300B12AB6 /* smoke.png in Resources */ = {isa = PBXBuildFile; fileRef = C27CB03E2065AE3300B12AB6 /* smoke.png */; };
+		C27CB0412065AE3300B12AB6 /* SmokeParticleSystem.scnp in Resources */ = {isa = PBXBuildFile; fileRef = C27CB03F2065AE3300B12AB6 /* SmokeParticleSystem.scnp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +54,8 @@
 		C27CB0382065636000B12AB6 /* CustomScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScene.swift; sourceTree = "<group>"; };
 		C27CB03A2065772400B12AB6 /* TowerOfHanoiChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TowerOfHanoiChecker.swift; sourceTree = "<group>"; };
 		C27CB03C206586C800B12AB6 /* NumberOfMovesIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberOfMovesIndicator.swift; sourceTree = "<group>"; };
+		C27CB03E2065AE3300B12AB6 /* smoke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smoke.png; sourceTree = "<group>"; };
+		C27CB03F2065AE3300B12AB6 /* SmokeParticleSystem.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = SmokeParticleSystem.scnp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,8 @@
 				C27CB0382065636000B12AB6 /* CustomScene.swift */,
 				C27CB03A2065772400B12AB6 /* TowerOfHanoiChecker.swift */,
 				C27CB03C206586C800B12AB6 /* NumberOfMovesIndicator.swift */,
+				C27CB03E2065AE3300B12AB6 /* smoke.png */,
+				C27CB03F2065AE3300B12AB6 /* SmokeParticleSystem.scnp */,
 			);
 			path = Hanoi;
 			sourceTree = "<group>";
@@ -170,9 +176,11 @@
 			files = (
 				C27CB03520646D7000B12AB6 /* BokehParticleSystem.scnp in Resources */,
 				C27CB03420646D7000B12AB6 /* bokeh.png in Resources */,
+				C27CB0402065AE3300B12AB6 /* smoke.png in Resources */,
 				C25A208A205F627400633515 /* art.scnassets in Resources */,
 				C25A2094205F627400633515 /* LaunchScreen.storyboard in Resources */,
 				C25A2091205F627400633515 /* Assets.xcassets in Resources */,
+				C27CB0412065AE3300B12AB6 /* SmokeParticleSystem.scnp in Resources */,
 				C25A208F205F627400633515 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
