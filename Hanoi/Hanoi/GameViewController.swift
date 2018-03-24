@@ -36,7 +36,6 @@ class GameViewController: UIViewController {
     var scnView: SCNView!
     var scnScene: SCNScene!
     var cameraNode: SCNNode!
-//    var hud: Hud!
     var numberOfMovesIndicator: NumberOfMovesIndicator!
     
     var towerOfHanoi: TowerOfHanoi!
@@ -53,7 +52,6 @@ class GameViewController: UIViewController {
         setupTowerOfHanoi(numberOfDisks: 3, numberOfPegs: 3)
         setupTowerOfHanoiChecker()
         setupCamera()
-//        setupHud()
         setupNumberOfMovesIndicator()
         setupTapRecognizer()
         
@@ -89,11 +87,6 @@ class GameViewController: UIViewController {
         scnView.backgroundColor = .black
     }
     
-//    private func setupHud() {
-//        self.hud = Hud(size: scnView.bounds.size)
-//        scnView.overlaySKScene = self.hud
-//    }
-    
     private func setupNumberOfMovesIndicator() {
         self.numberOfMovesIndicator = NumberOfMovesIndicator(towerOfHanoi: self.towerOfHanoi)
     }
@@ -112,7 +105,6 @@ class GameViewController: UIViewController {
         cameraNode.camera = SCNCamera()
         cameraNode.position = SCNVector3(x: 0, y: 10, z: Float(self.towerOfHanoi.base.width / 2))
         cameraNode.eulerAngles = SCNVector3(x: -Float.pi / 4, y: 0, z: 0)
-//        cameraNode.rotation = SCNVector4(x: 1, y: 0, z: 0, w: Float.pi / 4)
         scnScene.rootNode.addChildNode(cameraNode)
     }
     
@@ -201,7 +193,6 @@ extension GameViewController: MovementSequencerDelegate {
     }
     
     func willExecuteMovement(_ movement: Movement) {
-//        hud.numberOfMoves += 1
         if !didSolveTowerOfHanoi {
             numberOfMovesIndicator.numberOfMoves += 1
         }
