@@ -40,11 +40,10 @@ class GameViewController: UIViewController {
     
     var towerOfHanoi: TowerOfHanoi!
     var towerOfHanoiChecker: TowerOfHanoiChecker!
+    var didCompleteTowerOfHanoi: Bool = false
     
     var sourcePeg: Peg?
     var targetPeg: Peg?
-    
-    var didSolveTowerOfHanoi: Bool = false
     
     private func setup() {
         setupView()
@@ -188,12 +187,15 @@ class GameViewController: UIViewController {
 
 extension GameViewController: MovementSequencerDelegate {
     func didExecuteMovement(_ movement: Movement) {
-        didSolveTowerOfHanoi = towerOfHanoiChecker.check()
-        
+        let check = towerOfHanoiChecker.check()
+        if check && !didCompleteTowerOfHanoi {
+            numberOfMovesIndicator.didCompleteTowerOfHanoi = check
+        }
+        didCompleteTowerOfHanoi = check
     }
     
     func willExecuteMovement(_ movement: Movement) {
-        if !didSolveTowerOfHanoi {
+        if !numberOfMovesIndicator.didCompleteTowerOfHanoi {
             numberOfMovesIndicator.numberOfMoves += 1
         }
     }

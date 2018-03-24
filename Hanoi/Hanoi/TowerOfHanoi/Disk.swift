@@ -19,11 +19,7 @@ class Disk {
     var isSelected: Bool {
         didSet {
             if oldValue != isSelected {
-                if isSelected {
-                    addParticles()
-                } else {
-                    removeParticles()
-                }
+                isSelected ? addParticles() : removeParticles()
             }
         }
     }

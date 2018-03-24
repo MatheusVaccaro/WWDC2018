@@ -29,6 +29,8 @@
 		C27CB03D206586C800B12AB6 /* NumberOfMovesIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27CB03C206586C800B12AB6 /* NumberOfMovesIndicator.swift */; };
 		C27CB0402065AE3300B12AB6 /* smoke.png in Resources */ = {isa = PBXBuildFile; fileRef = C27CB03E2065AE3300B12AB6 /* smoke.png */; };
 		C27CB0412065AE3300B12AB6 /* SmokeParticleSystem.scnp in Resources */ = {isa = PBXBuildFile; fileRef = C27CB03F2065AE3300B12AB6 /* SmokeParticleSystem.scnp */; };
+		C2A16F3F20670527004216F1 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = C2A16F3D20670527004216F1 /* spark.png */; };
+		C2A16F4020670527004216F1 /* FireworksParticleSystem.scnp in Resources */ = {isa = PBXBuildFile; fileRef = C2A16F3E20670527004216F1 /* FireworksParticleSystem.scnp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +58,8 @@
 		C27CB03C206586C800B12AB6 /* NumberOfMovesIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberOfMovesIndicator.swift; sourceTree = "<group>"; };
 		C27CB03E2065AE3300B12AB6 /* smoke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smoke.png; sourceTree = "<group>"; };
 		C27CB03F2065AE3300B12AB6 /* SmokeParticleSystem.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = SmokeParticleSystem.scnp; sourceTree = "<group>"; };
+		C2A16F3D20670527004216F1 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		C2A16F3E20670527004216F1 /* FireworksParticleSystem.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = FireworksParticleSystem.scnp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C23CBF41206701430037952F /* ParticleSystems */ = {
+			isa = PBXGroup;
+			children = (
+				C27CB03220646D7000B12AB6 /* bokeh.png */,
+				C27CB03320646D7000B12AB6 /* BokehParticleSystem.scnp */,
+				C27CB03E2065AE3300B12AB6 /* smoke.png */,
+				C27CB03F2065AE3300B12AB6 /* SmokeParticleSystem.scnp */,
+				C2A16F3D20670527004216F1 /* spark.png */,
+				C2A16F3E20670527004216F1 /* FireworksParticleSystem.scnp */,
+			);
+			path = ParticleSystems;
+			sourceTree = "<group>";
+		};
+		C23CBF42206701680037952F /* TowerOfHanoi */ = {
+			isa = PBXGroup;
+			children = (
+				C25A209B2060265A00633515 /* TowerOfHanoi.swift */,
+				C25A209D2061679300633515 /* Disk.swift */,
+				C25A20A3206167EE00633515 /* Peg.swift */,
+				C25A20A52062D0CD00633515 /* Base.swift */,
+				C2356561206406B5002F4C67 /* Hitbox.swift */,
+			);
+			path = TowerOfHanoi;
+			sourceTree = "<group>";
+		};
+		C23CBF43206701930037952F /* AuxiliaryStructures */ = {
+			isa = PBXGroup;
+			children = (
+				C25A20A1206167D600633515 /* Extensions.swift */,
+				C25A209F206167B900633515 /* Stack.swift */,
+				C25A20A72062E58000633515 /* MovementQueue.swift */,
+				C27CB03620651DE300B12AB6 /* Hud.swift */,
+				C27CB03A2065772400B12AB6 /* TowerOfHanoiChecker.swift */,
+				C27CB03C206586C800B12AB6 /* NumberOfMovesIndicator.swift */,
+			);
+			path = AuxiliaryStructures;
+			sourceTree = "<group>";
+		};
 		C25A207B205F627400633515 = {
 			isa = PBXGroup;
 			children = (
@@ -95,22 +137,10 @@
 				C25A2090205F627400633515 /* Assets.xcassets */,
 				C25A2092205F627400633515 /* LaunchScreen.storyboard */,
 				C25A2095205F627400633515 /* Info.plist */,
-				C25A209B2060265A00633515 /* TowerOfHanoi.swift */,
-				C25A209D2061679300633515 /* Disk.swift */,
-				C25A209F206167B900633515 /* Stack.swift */,
-				C25A20A1206167D600633515 /* Extensions.swift */,
-				C25A20A3206167EE00633515 /* Peg.swift */,
-				C25A20A52062D0CD00633515 /* Base.swift */,
-				C25A20A72062E58000633515 /* MovementQueue.swift */,
-				C2356561206406B5002F4C67 /* Hitbox.swift */,
-				C27CB03220646D7000B12AB6 /* bokeh.png */,
-				C27CB03320646D7000B12AB6 /* BokehParticleSystem.scnp */,
-				C27CB03620651DE300B12AB6 /* Hud.swift */,
 				C27CB0382065636000B12AB6 /* CustomScene.swift */,
-				C27CB03A2065772400B12AB6 /* TowerOfHanoiChecker.swift */,
-				C27CB03C206586C800B12AB6 /* NumberOfMovesIndicator.swift */,
-				C27CB03E2065AE3300B12AB6 /* smoke.png */,
-				C27CB03F2065AE3300B12AB6 /* SmokeParticleSystem.scnp */,
+				C23CBF42206701680037952F /* TowerOfHanoi */,
+				C23CBF43206701930037952F /* AuxiliaryStructures */,
+				C23CBF41206701430037952F /* ParticleSystems */,
 			);
 			path = Hanoi;
 			sourceTree = "<group>";
@@ -175,7 +205,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C27CB03520646D7000B12AB6 /* BokehParticleSystem.scnp in Resources */,
+				C2A16F3F20670527004216F1 /* spark.png in Resources */,
 				C27CB03420646D7000B12AB6 /* bokeh.png in Resources */,
+				C2A16F4020670527004216F1 /* FireworksParticleSystem.scnp in Resources */,
 				C27CB0402065AE3300B12AB6 /* smoke.png in Resources */,
 				C25A208A205F627400633515 /* art.scnassets in Resources */,
 				C25A2094205F627400633515 /* LaunchScreen.storyboard in Resources */,

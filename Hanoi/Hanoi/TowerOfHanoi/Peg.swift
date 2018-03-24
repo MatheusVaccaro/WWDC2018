@@ -86,7 +86,6 @@ class Peg {
         let sequence = SCNAction.sequence([moveAction, waitAction])
         
         topDisk.node.runAction(sequence, completionHandler: completionHandler)
-        
     }
  
     private func createActionToMoveSuccess(disk: Disk, to destination: Peg, durationMultiplier: Double = 1) -> SCNAction {
