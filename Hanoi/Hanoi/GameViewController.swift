@@ -45,6 +45,8 @@ class GameViewController: UIViewController {
     var sourcePeg: Peg?
     var targetPeg: Peg?
     
+    var fireworks: FireworkPlayer!
+    
     private func setup() {
         setupView()
         setupScene()
@@ -53,7 +55,7 @@ class GameViewController: UIViewController {
         setupCamera()
         setupNumberOfMovesIndicator()
         setupTapRecognizer()
-        
+        setupFireworks()
         
         
         MovementSequencer.shared.delegate = self
@@ -110,6 +112,17 @@ class GameViewController: UIViewController {
     private func setupTapRecognizer() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
+    }
+    
+    private func setupFireworks() {
+        let basePosition = towerOfHanoi.base.node.position
+        let boundingBoxMin = SCNVector3(basePosition.x - Float(towerOfHanoi.base.width / 2),
+                                        basePosition.y + Float(towerOfHanoi.base.height + towerOfHanoi.pegs[0].height),
+                                        basePosition.z - Float(towerOfHanoi.base.length / 2))
+        let boundingBoxMax = SCNVector3(basePosition.x + Float(towerOfHanoi.base.width / 2),
+                                        basePosition.y + Float((towerOfHanoi.base.height + towerOfHanoi.pegs[0].height) * 2),
+                                        basePosition.z + Float(towerOfHanoi.base.length / 2))
+        self.fireworks = FireworkPlayer(rootNode: scnScene.rootNode, boundingBox: (min: boundingBoxMin, max: boundingBoxMax), maxSimultaneousFireworks: towerOfHanoi.numberOfDisks * 2)
     }
     
     @objc
@@ -190,6 +203,7 @@ extension GameViewController: MovementSequencerDelegate {
         let check = towerOfHanoiChecker.check()
         if check && !didCompleteTowerOfHanoi {
             numberOfMovesIndicator.didCompleteTowerOfHanoi = check
+            fireworks.play()
         }
         didCompleteTowerOfHanoi = check
     }

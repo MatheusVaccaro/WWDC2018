@@ -75,7 +75,6 @@ class Disk {
 
     
     private func addParticles() {
-//        let particleSystemName = "BokehParticleSystem.scnp"
         let particleSystemName = "SmokeParticleSystem.scnp"
         let bokehParticleSystem = SCNParticleSystem(named: particleSystemName, inDirectory: nil)
         bokehParticleSystem?.particleColor = self.color
