@@ -20,7 +20,7 @@
 		C25A20A2206167D600633515 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25A20A1206167D600633515 /* Extensions.swift */; };
 		C25A20A4206167EE00633515 /* Peg.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25A20A3206167EE00633515 /* Peg.swift */; };
 		C25A20A62062D0CD00633515 /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25A20A52062D0CD00633515 /* Base.swift */; };
-		C25A20A82062E58000633515 /* MovementQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25A20A72062E58000633515 /* MovementQueue.swift */; };
+		C25A20A82062E58000633515 /* MovementSequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25A20A72062E58000633515 /* MovementSequencer.swift */; };
 		C27CB0392065636000B12AB6 /* TowerOfHanoiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27CB0382065636000B12AB6 /* TowerOfHanoiView.swift */; };
 		C27CB03B2065772400B12AB6 /* TowerOfHanoiChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27CB03A2065772400B12AB6 /* TowerOfHanoiChecker.swift */; };
 		C27CB03D206586C800B12AB6 /* NumberOfMovesIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27CB03C206586C800B12AB6 /* NumberOfMovesIndicator.swift */; };
@@ -47,7 +47,7 @@
 		C25A20A1206167D600633515 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C25A20A3206167EE00633515 /* Peg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Peg.swift; sourceTree = "<group>"; };
 		C25A20A52062D0CD00633515 /* Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
-		C25A20A72062E58000633515 /* MovementQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementQueue.swift; sourceTree = "<group>"; };
+		C25A20A72062E58000633515 /* MovementSequencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementSequencer.swift; sourceTree = "<group>"; };
 		C27CB0382065636000B12AB6 /* TowerOfHanoiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TowerOfHanoiView.swift; sourceTree = "<group>"; };
 		C27CB03A2065772400B12AB6 /* TowerOfHanoiChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TowerOfHanoiChecker.swift; sourceTree = "<group>"; };
 		C27CB03C206586C800B12AB6 /* NumberOfMovesIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberOfMovesIndicator.swift; sourceTree = "<group>"; };
@@ -97,7 +97,7 @@
 			children = (
 				C25A20A1206167D600633515 /* Extensions.swift */,
 				C25A209F206167B900633515 /* Stack.swift */,
-				C25A20A72062E58000633515 /* MovementQueue.swift */,
+				C25A20A72062E58000633515 /* MovementSequencer.swift */,
 				C27CB03A2065772400B12AB6 /* TowerOfHanoiChecker.swift */,
 				C27CB03C206586C800B12AB6 /* NumberOfMovesIndicator.swift */,
 				C2A16F43206722AB004216F1 /* Firework.swift */,
@@ -227,7 +227,7 @@
 				C27CB0392065636000B12AB6 /* TowerOfHanoiView.swift in Sources */,
 				C25A209C2060265A00633515 /* TowerOfHanoi.swift in Sources */,
 				C25A20A4206167EE00633515 /* Peg.swift in Sources */,
-				C25A20A82062E58000633515 /* MovementQueue.swift in Sources */,
+				C25A20A82062E58000633515 /* MovementSequencer.swift in Sources */,
 				C25A2088205F627400633515 /* AppDelegate.swift in Sources */,
 				C2356562206406B5002F4C67 /* Hitbox.swift in Sources */,
 			);

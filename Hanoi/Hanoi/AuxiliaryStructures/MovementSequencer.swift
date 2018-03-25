@@ -1,5 +1,5 @@
 //
-//  MovementQueue.swift
+//  MovementSequencer.swift
 //  Hanoi
 //
 //  Created by Matheus Vaccaro on 21/03/18.
@@ -37,8 +37,7 @@ class MovementSequencer {
     func execute(movements: [Movement], completionHandler: (() -> Void)? = nil) {
         self.isExecuting = true
         self.completionHandler = completionHandler
-        _execute(movements: movements)
-        
+        self._execute(movements: movements)
     }
     
     
