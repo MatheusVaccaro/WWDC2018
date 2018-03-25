@@ -18,8 +18,8 @@ class IntroductionView: TowerOfHanoiView {
             .moveTopDisk(from: 0, to: 2)
         ]
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [unowned self] in
-            self._execute(movements: movements)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            MovementSequencer.shared.execute(movements: moves)
         }
     }
 }
