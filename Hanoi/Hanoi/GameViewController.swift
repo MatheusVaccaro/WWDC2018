@@ -50,7 +50,7 @@ class GameViewController: UIViewController {
     private func setup() {
         setupView()
         setupScene()
-        setupTowerOfHanoi(numberOfDisks: 3, numberOfPegs: 3)
+        setupTowerOfHanoi(numberOfDisks: 1, numberOfPegs: 3)
         setupTowerOfHanoiChecker()
         setupCamera()
         setupNumberOfMovesIndicator()
@@ -71,7 +71,7 @@ class GameViewController: UIViewController {
             .moveTopDisk(from: 0, to: 2)
         ]
         
-        //        MovementSequencer.shared.execute(movements: moves)
+        MovementSequencer.shared.execute(movements: moves)
     }
     
     private func setupView() {
@@ -122,7 +122,7 @@ class GameViewController: UIViewController {
         let boundingBoxMax = SCNVector3(basePosition.x + Float(towerOfHanoi.base.width / 2),
                                         basePosition.y + Float((towerOfHanoi.base.height + towerOfHanoi.pegs[0].height) * 2),
                                         basePosition.z + Float(towerOfHanoi.base.length / 2))
-        self.fireworks = FireworkPlayer(rootNode: scnScene.rootNode, boundingBox: (min: boundingBoxMin, max: boundingBoxMax), maxSimultaneousFireworks: towerOfHanoi.numberOfDisks * 2)
+        self.fireworks = FireworkPlayer(rootNode: scnScene.rootNode, boundingBox: (min: boundingBoxMin, max: boundingBoxMax), maxSimultaneousFireworks: 5, maxFireworkRadius: CGFloat(0.3 * Float(towerOfHanoi.numberOfDisks)))
     }
     
     @objc

@@ -16,13 +16,15 @@ class Firework {
     let node: SCNNode
     let boundingBox: (min: SCNVector3, max: SCNVector3)
     let color: UIColor
+    let maxFireworkRadius: CGFloat
     
-    init(rootNode: SCNNode, boundingBox: (min: SCNVector3, max: SCNVector3), color: UIColor) {
+    init(rootNode: SCNNode, boundingBox: (min: SCNVector3, max: SCNVector3), color: UIColor, maxFireworkRadius: CGFloat) {
         self.rootNode = rootNode
         
         self.node = SCNNode()
         self.boundingBox = boundingBox
         self.color = color
+        self.maxFireworkRadius = maxFireworkRadius
         
         let particleSystemName = "FireworksParticleSystem.scnp"
         self.fireworksParticleSystem = SCNParticleSystem(named: particleSystemName, inDirectory: nil)!
@@ -37,6 +39,9 @@ class Firework {
         node.position = SCNVector3(randomX, randomY, randomZ)
         
         fireworksParticleSystem.particleColor = color
+        
+        let emitterShape = SCNSphere(radius: maxFireworkRadius)
+        fireworksParticleSystem.emitterShape = emitterShape
 
         let addFireworkAction = SCNAction.run { [weak self] _ in
             guard let fireworksParticleSystem = self?.fireworksParticleSystem, let node = self?.node else {
@@ -71,17 +76,19 @@ class FireworkPlayer {
     let rootNode: SCNNode
     let boundingBox: (min: SCNVector3, max: SCNVector3)
     let maxSimultaneousFireworks: Int
+    let maxFireworkRadius: CGFloat
     
     private(set) var isPlaying: Bool = false
     static let actionKey = "fireworks"
     
     private var currentFireworks: [Firework] = []
     
-    init(rootNode: SCNNode, boundingBox: (min: SCNVector3, max: SCNVector3), colors: [UIColor] = [], maxSimultaneousFireworks: Int) {
+    init(rootNode: SCNNode, boundingBox: (min: SCNVector3, max: SCNVector3), colors: [UIColor] = [], maxSimultaneousFireworks: Int, maxFireworkRadius: CGFloat) {
         self.colors = colors
         self.rootNode = rootNode
         self.boundingBox = boundingBox
         self.maxSimultaneousFireworks = maxSimultaneousFireworks
+        self.maxFireworkRadius = maxFireworkRadius
     }
     
     func play() {
@@ -104,7 +111,7 @@ class FireworkPlayer {
         for _ in 0..<randomNumber {
             let randomWait = CGFloat(arc4random()) / CGFloat(UINT32_MAX)
             let randomColor = colors.isEmpty ? UIColor.random() : colors[Int(arc4random_uniform(UInt32(colors.count)))]
-            let currentFirework = Firework(rootNode: rootNode, boundingBox: boundingBox, color: randomColor)
+            let currentFirework = Firework(rootNode: rootNode, boundingBox: boundingBox, color: randomColor, maxFireworkRadius: maxFireworkRadius)
             let waitAction = SCNAction.wait(duration: TimeInterval(randomWait))
             let createFireworkAction = currentFirework.createFireworkAction()
             let sequence = SCNAction.sequence([waitAction, createFireworkAction])
