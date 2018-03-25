@@ -71,7 +71,7 @@ class GameViewController: UIViewController {
             .moveTopDisk(from: 0, to: 2)
         ]
         
-        MovementSequencer.shared.execute(movements: moves)
+//        MovementSequencer.shared.execute(movements: moves)
     }
     
     private func setupView() {
@@ -125,6 +125,34 @@ class GameViewController: UIViewController {
         self.fireworks = FireworkPlayer(rootNode: scnScene.rootNode, boundingBox: (min: boundingBoxMin, max: boundingBoxMax), maxSimultaneousFireworks: 5, maxFireworkRadius: CGFloat(0.3 * Float(towerOfHanoi.numberOfDisks)))
     }
     
+    private func updateManipulatablePegs(touchedHitbox hitbox: Hitbox) {
+        guard let selectedPeg = hitbox.associatedObject as? Peg else { return }
+        if let sourcePeg = self.sourcePeg {
+            if selectedPeg === sourcePeg {
+                //print("Unselecting source peg \(selectedPeg.index)")
+                self.sourcePeg?.isSelected = false
+                self.sourcePeg = nil
+                return
+            }
+            self.targetPeg = selectedPeg
+            //print("Setting peg \(selectedPeg.index) as target peg")
+            
+            let movement: [Movement] = [.moveTopDisk(from: self.sourcePeg!.index, to: self.targetPeg!.index)]
+            MovementSequencer.shared.execute(movements: movement)
+            self.sourcePeg?.isSelected = false
+            self.sourcePeg = nil
+            self.targetPeg?.isSelected = false
+            self.targetPeg = selectedPeg
+            //print("Setting source and target pegs to nil")
+        } else {
+            if !selectedPeg.diskStack.isEmpty {
+                self.sourcePeg = selectedPeg
+                self.sourcePeg?.isSelected = true
+                //print("Setting peg \(selectedPeg.index) as source peg")
+            }
+        }
+    }
+    
     @objc
     func handleTap(_ gestureRecognize: UIGestureRecognizer) {
         // retrieve the SCNView
@@ -136,64 +164,8 @@ class GameViewController: UIViewController {
         // check that we clicked on at least one object
         if hitResults.count > 0 {
             // retrieved the first clicked object
-            guard let result = hitResults[0].node as? Hitbox, !MovementSequencer.shared.isExecuting else { return }
-            
-            // get its material
-            let material = result.geometry!.firstMaterial!
-            
-            // highlight it
-            SCNTransaction.begin()
-            SCNTransaction.animationDuration = 0.5
-            
-            // on completion - unhighlight
-            SCNTransaction.completionBlock = {
-                SCNTransaction.begin()
-                SCNTransaction.animationDuration = 0.5
-                
-                material.emission.contents = UIColor.black
-                
-                SCNTransaction.commit()
-            }
-            
-            material.emission.contents = UIColor.white
-            
-            SCNTransaction.commit()
-            
-            
-            
-            guard let selectedPeg = result.associatedObject as? Peg else { return }
-            
-            if let sourcePeg = self.sourcePeg {
-                if selectedPeg === sourcePeg {
-//                    print("Unselecting source peg \(selectedPeg.index)")
-                    self.sourcePeg?.isSelected = false
-                    self.sourcePeg = nil
-                    return
-                }
-                
-                
-                self.targetPeg = selectedPeg
-//                print("Setting peg \(selectedPeg.index) as target peg")
-                
-                
-                let movement: [Movement] = [.moveTopDisk(from: self.sourcePeg!.index, to: self.targetPeg!.index)]
-                MovementSequencer.shared.execute(movements: movement) 
-                self.sourcePeg?.isSelected = false
-                self.sourcePeg = nil
-                self.targetPeg?.isSelected = false
-                self.targetPeg = nil
-//                print("Setting source and target pegs to nil")
-                
-                
-                
-            } else {
-                if !selectedPeg.diskStack.isEmpty {
-                    self.sourcePeg = selectedPeg
-                    self.sourcePeg?.isSelected = true
-//                    print("Setting peg \(selectedPeg.index) as source peg")
-                }
-            }
-            
+            guard let hitbox = hitResults[0].node as? Hitbox, !MovementSequencer.shared.isExecuting else { return }
+            updateManipulatablePegs(touchedHitbox: hitbox)
         }
     }
 }

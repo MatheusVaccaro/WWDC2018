@@ -152,7 +152,6 @@ class Peg {
         
         // -height because the disk was lifted by it's height
         let initialDiskPosition = SCNVector3(disk.node.position.x, disk.node.position.y - Float(disk.height), disk.node.position.z)
-//        let initialDiskPosition = disk.node.position
         let moveBackVector = SCNVector3(initialDiskPosition.x, relativeMaxY + heightOffset, initialDiskPosition.z)
         let moveBackAction = SCNAction.move(to: moveBackVector, duration: duration)
         

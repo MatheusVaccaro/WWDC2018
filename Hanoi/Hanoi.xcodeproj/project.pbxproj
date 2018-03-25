@@ -21,7 +21,6 @@
 		C25A20A4206167EE00633515 /* Peg.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25A20A3206167EE00633515 /* Peg.swift */; };
 		C25A20A62062D0CD00633515 /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25A20A52062D0CD00633515 /* Base.swift */; };
 		C25A20A82062E58000633515 /* MovementQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25A20A72062E58000633515 /* MovementQueue.swift */; };
-		C27CB03720651DE300B12AB6 /* Hud.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27CB03620651DE300B12AB6 /* Hud.swift */; };
 		C27CB0392065636000B12AB6 /* CustomScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27CB0382065636000B12AB6 /* CustomScene.swift */; };
 		C27CB03B2065772400B12AB6 /* TowerOfHanoiChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27CB03A2065772400B12AB6 /* TowerOfHanoiChecker.swift */; };
 		C27CB03D206586C800B12AB6 /* NumberOfMovesIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27CB03C206586C800B12AB6 /* NumberOfMovesIndicator.swift */; };
@@ -49,7 +48,6 @@
 		C25A20A3206167EE00633515 /* Peg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Peg.swift; sourceTree = "<group>"; };
 		C25A20A52062D0CD00633515 /* Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
 		C25A20A72062E58000633515 /* MovementQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementQueue.swift; sourceTree = "<group>"; };
-		C27CB03620651DE300B12AB6 /* Hud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hud.swift; sourceTree = "<group>"; };
 		C27CB0382065636000B12AB6 /* CustomScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScene.swift; sourceTree = "<group>"; };
 		C27CB03A2065772400B12AB6 /* TowerOfHanoiChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TowerOfHanoiChecker.swift; sourceTree = "<group>"; };
 		C27CB03C206586C800B12AB6 /* NumberOfMovesIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberOfMovesIndicator.swift; sourceTree = "<group>"; };
@@ -100,7 +98,6 @@
 				C25A20A1206167D600633515 /* Extensions.swift */,
 				C25A209F206167B900633515 /* Stack.swift */,
 				C25A20A72062E58000633515 /* MovementQueue.swift */,
-				C27CB03620651DE300B12AB6 /* Hud.swift */,
 				C27CB03A2065772400B12AB6 /* TowerOfHanoiChecker.swift */,
 				C27CB03C206586C800B12AB6 /* NumberOfMovesIndicator.swift */,
 				C2A16F43206722AB004216F1 /* Firework.swift */,
@@ -229,7 +226,6 @@
 				C27CB03D206586C800B12AB6 /* NumberOfMovesIndicator.swift in Sources */,
 				C27CB0392065636000B12AB6 /* CustomScene.swift in Sources */,
 				C25A209C2060265A00633515 /* TowerOfHanoi.swift in Sources */,
-				C27CB03720651DE300B12AB6 /* Hud.swift in Sources */,
 				C25A20A4206167EE00633515 /* Peg.swift in Sources */,
 				C25A20A82062E58000633515 /* MovementQueue.swift in Sources */,
 				C25A2088205F627400633515 /* AppDelegate.swift in Sources */,
