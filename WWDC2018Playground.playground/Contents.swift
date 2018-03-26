@@ -1,25 +1,30 @@
 class IntroductionView: TowerOfHanoiView {
-    override func numberOfDisks() -> Int {
-        return 3
+    
+    let numberOfDisks = 3
+    let numberOfPegs = 3
+    
+    let moves: [Movement] = [
+        .moveTopDisk(from: 0, to: 2),
+        .moveTopDisk(from: 0, to: 1),
+        .moveTopDisk(from: 2, to: 1),
+        .moveTopDisk(from: 0, to: 2),
+        .moveTopDisk(from: 1, to: 0),
+        .moveTopDisk(from: 1, to: 2),
+        .moveTopDisk(from: 0, to: 2)
+    ]
+    
+    
+    override func numberOfDisksForTower() -> Int {
+        return numberOfDisks
     }
     
-    override func numberOfPegs() -> Int {
-        return 3
+    override func numberOfPegsForTower() -> Int {
+        return numberOfPegs
     }
     
     override func setup() {
-        let moves: [Movement] = [
-            .moveTopDisk(from: 0, to: 2),
-            .moveTopDisk(from: 0, to: 1),
-            .moveTopDisk(from: 2, to: 1),
-            .moveTopDisk(from: 0, to: 2),
-            .moveTopDisk(from: 1, to: 0),
-            .moveTopDisk(from: 1, to: 2),
-            .moveTopDisk(from: 0, to: 2)
-        ]
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            MovementSequencer.shared.execute(movements: moves)
+            MovementSequencer.shared.execute(movements: self.moves)
         }
     }
 }

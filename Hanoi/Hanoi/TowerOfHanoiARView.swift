@@ -8,21 +8,35 @@
 
 import Foundation
 import SceneKit
+import ARKit
 
-class TowerOfHanoiView: SCNView {
+class TowerOfHanoiARView: ARSCNView {
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
     override init(frame: CGRect, options: [String : Any]? = nil) {
         super.init(frame: frame, options: options)
+        
+        
+        delegate = self
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = .horizontal
+        session.run(configuration)
+//        debugOptions = ARSCNDebugOptions.showFeaturePoints
+        
+        
+        
+        
+        
+        
         setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     var scnScene: SCNScene!
     var cameraNode: SCNNode!
     var numberOfMovesIndicator: NumberOfMovesIndicator!
@@ -41,7 +55,7 @@ class TowerOfHanoiView: SCNView {
         setupScene()
         setupTowerOfHanoi(numberOfDisks: 3, numberOfPegs: 3)
         setupTowerOfHanoiChecker()
-        setupCamera()
+//        setupCamera()
         setupNumberOfMovesIndicator()
         setupTapRecognizer()
         setupFireworks()
@@ -65,7 +79,7 @@ class TowerOfHanoiView: SCNView {
     
     private func setupView() {
         showsStatistics = true
-        allowsCameraControl = true
+//        allowsCameraControl = true
         autoenablesDefaultLighting = true
         isPlaying = true
     }
@@ -82,7 +96,7 @@ class TowerOfHanoiView: SCNView {
     
     private func setupTowerOfHanoi(numberOfDisks nDisks: Int, numberOfPegs nPegs: Int) {
         self.towerOfHanoi = TowerOfHanoi(numberOfDisks: nDisks, numberOfPegs: nPegs)
-        scnScene.rootNode.addChildNode(towerOfHanoi.node)
+//        scnScene.rootNode.addChildNode(towerOfHanoi.node)
     }
     
     private func setupTowerOfHanoiChecker() {
@@ -155,7 +169,7 @@ class TowerOfHanoiView: SCNView {
     }
 }
 
-extension TowerOfHanoiView: MovementSequencerDelegate {
+extension TowerOfHanoiARView: MovementSequencerDelegate {
     func didExecuteMovement(_ movement: Movement) {
         let check = towerOfHanoiChecker.check()
         if check && !didCompleteTowerOfHanoi {
@@ -171,3 +185,43 @@ extension TowerOfHanoiView: MovementSequencerDelegate {
         }
     }
 }
+
+extension TowerOfHanoiARView: ARSCNViewDelegate {
+    func session(_ session: ARSession, didFailWithError error: Error) {
+        print("Session Failed - probably due to lack of camera access")
+    }
+    
+    func sessionWasInterrupted(_ session: ARSession) {
+        print("Session interrupted")
+    }
+    
+    func sessionInterruptionEnded(_ session: ARSession) {
+        print("Session resumed")
+        session.run(session.configuration!,
+                              options: [.resetTracking,
+                                        .removeExistingAnchors])
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        print("plane detected")
+        
+        if !didAdd {
+//            let position = node.position
+//            towerOfHanoi.node.position = position
+//            scnScene.rootNode.addChildNode(towerOfHanoi.node)
+            node.addChildNode(towerOfHanoi.node)
+        }
+    }
+    
+}
+
+
+
+var didAdd: Bool = false
+
+
+
+
+
+
+

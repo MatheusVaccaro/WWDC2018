@@ -29,6 +29,7 @@
 		C2A16F3F20670527004216F1 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = C2A16F3D20670527004216F1 /* spark.png */; };
 		C2A16F4020670527004216F1 /* FireworksParticleSystem.scnp in Resources */ = {isa = PBXBuildFile; fileRef = C2A16F3E20670527004216F1 /* FireworksParticleSystem.scnp */; };
 		C2A16F44206722AB004216F1 /* Firework.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A16F43206722AB004216F1 /* Firework.swift */; };
+		C2D89A1C2069751600B27A4E /* TowerOfHanoiARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D89A1B2069751600B27A4E /* TowerOfHanoiARView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		C2A16F3D20670527004216F1 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		C2A16F3E20670527004216F1 /* FireworksParticleSystem.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = FireworksParticleSystem.scnp; sourceTree = "<group>"; };
 		C2A16F43206722AB004216F1 /* Firework.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Firework.swift; sourceTree = "<group>"; };
+		C2D89A1B2069751600B27A4E /* TowerOfHanoiARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TowerOfHanoiARView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 				C23CBF42206701680037952F /* TowerOfHanoi */,
 				C23CBF43206701930037952F /* AuxiliaryStructures */,
 				C23CBF41206701430037952F /* ParticleSystems */,
+				C2D89A1B2069751600B27A4E /* TowerOfHanoiARView.swift */,
 			);
 			path = Hanoi;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 			files = (
 				C25A20A62062D0CD00633515 /* Base.swift in Sources */,
 				C25A209E2061679300633515 /* Disk.swift in Sources */,
+				C2D89A1C2069751600B27A4E /* TowerOfHanoiARView.swift in Sources */,
 				C25A20A2206167D600633515 /* Extensions.swift in Sources */,
 				C25A20A0206167B900633515 /* Stack.swift in Sources */,
 				C27CB03B2065772400B12AB6 /* TowerOfHanoiChecker.swift in Sources */,

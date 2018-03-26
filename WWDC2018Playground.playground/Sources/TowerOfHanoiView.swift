@@ -36,11 +36,11 @@ open class TowerOfHanoiView: SCNView {
     
     var fireworks: FireworkPlayer!
     
-    open func numberOfDisks() -> Int {
+    open func numberOfDisksForTower() -> Int {
         return 3
     }
     
-    open func numberOfPegs() -> Int {
+    open func numberOfPegsForTower() -> Int {
         return 3
     }
     
@@ -51,7 +51,7 @@ open class TowerOfHanoiView: SCNView {
     private func _setup() {
         setupView()
         setupScene()
-        setupTowerOfHanoi(numberOfDisks: numberOfDisks(), numberOfPegs: numberOfPegs())
+        setupTowerOfHanoi(numberOfDisks: numberOfDisksForTower(), numberOfPegs: numberOfPegsForTower())
         setupTowerOfHanoiChecker()
         setupCamera()
         setupNumberOfMovesIndicator()
