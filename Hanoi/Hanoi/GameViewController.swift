@@ -30,8 +30,8 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let rect = self.view.frame
-//        self.view = TowerOfHanoiView(frame: rect, options: nil)
-        self.view = TowerOfHanoiARView(frame: rect, options: nil)
+        self.view = TowerOfHanoiView(frame: rect, options: nil)
+//        self.view = TowerOfHanoiARView(frame: rect, options: nil)
     }
     
 }

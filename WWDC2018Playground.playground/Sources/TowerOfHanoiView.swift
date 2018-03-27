@@ -70,9 +70,8 @@ open class TowerOfHanoiView: SCNView {
     }
     
     private func setupScene() {
-        scnScene = SCNScene()
+        scnScene = SCNScene(named: "SkyScene.scn")
         scene = scnScene
-        backgroundColor = .black
     }
     
     private func setupNumberOfMovesIndicator() {
@@ -91,9 +90,17 @@ open class TowerOfHanoiView: SCNView {
     private func setupCamera() {
         cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
-        cameraNode.position = SCNVector3(x: 0, y: 10, z: Float(self.towerOfHanoi.base.width / 2))
+        cameraNode.position = cameraPositionToSeeObject(withWidth: towerOfHanoi.base.width)
         cameraNode.eulerAngles = SCNVector3(x: -Float.pi / 4, y: 0, z: 0)
         scnScene.rootNode.addChildNode(cameraNode)
+    }
+    
+    private func cameraPositionToSeeObject(withWidth width: CGFloat) -> SCNVector3 {
+        let optimalHeightAndWidth: CGFloat = 9
+        let optimalObjectWidth: CGFloat = 19.5
+        
+        let targetHeightAndWidth = optimalHeightAndWidth * width / optimalObjectWidth
+        return SCNVector3(0, targetHeightAndWidth + 2, targetHeightAndWidth - 1)
     }
     
     private func setupTapRecognizer() {
