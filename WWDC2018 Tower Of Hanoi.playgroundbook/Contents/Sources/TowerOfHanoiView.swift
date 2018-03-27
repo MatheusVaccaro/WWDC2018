@@ -10,6 +10,10 @@ import Foundation
 import SceneKit
 
 open class TowerOfHanoiView: SCNView {
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
     public override init(frame: CGRect, options: [String : Any]? = nil) {
         super.init(frame: frame, options: options)
         _setup()
