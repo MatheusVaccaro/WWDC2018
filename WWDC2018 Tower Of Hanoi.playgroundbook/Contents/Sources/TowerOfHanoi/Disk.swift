@@ -52,7 +52,8 @@ class Disk {
     
     private static func generateDiskColorAndDiffuse(forOuterRadius radius: CGFloat) -> (UIColor, Any) {
         let path = "art.scnassets/"
-        switch radius {
+        let modRadius = radius.truncatingRemainder(dividingBy: 7.01)
+        switch modRadius {
         case 0...1:
             return (UIColor.red, path + "redWoodTexture.png")
         case 1...2:

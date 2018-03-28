@@ -5,11 +5,8 @@
 	<key>Version</key>
 	<string>1.0</string>
 	<key>Name</key>
-	<string>Sample Chapter</string>
-	<key>Pages</key>
-	<array>
-		<string>Page1.playgroundpage</string>
-		<string>Page3.playgroundpage</string>
-	</array>
+	<string>Play Time!</string>
+	<key>LiveViewMode</key>
+	<string>VisibleByDefault</string>
 </dict>
 </plist>
