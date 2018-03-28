@@ -96,7 +96,7 @@ open class TowerOfHanoiView: SCNView {
     }
     
     private func cameraPositionToSeeObject(withWidth width: CGFloat) -> SCNVector3 {
-        let optimalHeightAndWidth: CGFloat = 9
+        let optimalHeightAndWidth: CGFloat = 10
         let optimalObjectWidth: CGFloat = 19.5
         
         let targetHeightAndWidth = optimalHeightAndWidth * width / optimalObjectWidth
