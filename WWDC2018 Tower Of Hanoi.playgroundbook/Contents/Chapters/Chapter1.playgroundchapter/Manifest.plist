@@ -5,11 +5,11 @@
 	<key>Version</key>
 	<string>1.0</string>
 	<key>Name</key>
-	<string>Sample Chapter</string>
+	<string>The Puzzle</string>
 	<key>Pages</key>
 	<array>
 		<string>Page1.playgroundpage</string>
-		<string>Page3.playgroundpage</string>
+		<string>Page2.playgroundpage</string>
 	</array>
 </dict>
 </plist>

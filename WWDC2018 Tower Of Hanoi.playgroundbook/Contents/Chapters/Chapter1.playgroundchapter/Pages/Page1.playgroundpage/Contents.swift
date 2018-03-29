@@ -18,7 +18,7 @@
  
  1. Only the top disk of a stack can be moved.
  2. Only one disk can be moved at a time.
- 3. Larger disks can not be placed on top of smaller disks.
+ 3. Larger disks cannot be placed on top of smaller disks.
  4. Disks can be placed on empty rods.
  
  Don't worry, neither will your iPad stop working nor will the world end when you move the last piece! 😅
@@ -37,9 +37,9 @@
  - Callout(Example): *Moving disks between rods.*\
 This example shows the command you can use to move the disk at the top of the first rod to the third rod. \
  \
- `moveTopDisk(fromRod: 1, toRod: 3)`
+ `moveTopDisk(fromRod: 0, toRod: 2)`
  
- When you're ready, go on to the [next page](@next).
+ Try playing with the puzzle. After you're done, let's go to the [next page](@next) to build your own version of Tower of Hanoi!
  
 */
 //#-code-completion(everything, hide)

@@ -7,14 +7,15 @@
 	<key>ContentVersion</key>
 	<string>1.0</string>
 	<key>Name</key>
-	<string>Starter</string>
+	<string>Tower of Hanoi</string>
 	<key>ContentIdentifier</key>
 	<string>com.matheusvaccaro.Hanoi</string>
 	<key>DeploymentTarget</key>
-	<string>ios10.0</string>
+	<string>ios11.0</string>
 	<key>Chapters</key>
 	<array>
 		<string>Chapter1.playgroundchapter</string>
+		<string>Chapter2.playgroundchapter</string>
 	</array>
 </dict>
 </plist>
