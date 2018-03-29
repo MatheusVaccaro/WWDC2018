@@ -18,7 +18,7 @@ class Firework {
     let color: UIColor
     let maxFireworkRadius: CGFloat
     
-    private static let fireworkSound: String = "Menu3B.wav"
+    private static let fireworkSound: String = "firework.wav"
     
     init(rootNode: SCNNode, boundingBox: (min: SCNVector3, max: SCNVector3), color: UIColor, maxFireworkRadius: CGFloat) {
         self.rootNode = rootNode

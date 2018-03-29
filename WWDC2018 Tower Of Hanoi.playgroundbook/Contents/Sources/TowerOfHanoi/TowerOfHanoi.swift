@@ -22,9 +22,9 @@ class TowerOfHanoi {
         }
     }
     
-    private static let backgroundMusic: String = "Menu3B.wav"
+    private static let backgroundMusic: String = "backgroundMusic.wav"
     private static let bgmKey: String = "bgmKey"
-    private static let victorySound: String = "Menu3B.wav"
+    private static let victorySound: String = "victory.wav"
     
     init(numberOfDisks nDisks: Int, numberOfPegs nPegs: Int, initialPegIndex: Int = 0) {
         self.node = SCNNode()
@@ -79,6 +79,7 @@ class TowerOfHanoi {
     
     private func playBGM() {
         let audioSource = SCNAudioSource(fileNamed: TowerOfHanoi.backgroundMusic)!
+        audioSource.volume = 0.35
         let audioAction = SCNAction.playAudio(audioSource, waitForCompletion: true)
         let repeatForever = SCNAction.repeatForever(audioAction)
         node.runAction(repeatForever, forKey: TowerOfHanoi.bgmKey)

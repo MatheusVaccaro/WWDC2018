@@ -7,7 +7,7 @@ func moveTopDisk(fromRod sourceRod: Int, toRod targetRod: Int) {
 }
 
 var numberOfRods = 3
-var numberOfDisks = 3
+var numberOfDisks = 4
 
 //#-end-hidden-code
 /*:
@@ -18,14 +18,9 @@ var numberOfDisks = 3
  - Note:
  There can be more than one solution for the puzzle based on its configuration.
  
- Try tapping "Run My Code" to see what the solution looks like.
+ Tap "Run My Code" to see what the solution looks like.
 */
-// The number of rods the puzzle will have.
-numberOfRods = 3
-
-// Determines how many disks will be stacked on the first rod.
-numberOfDisks = 4
-
+// Sequence of moves to solve the puzzle
 moveTopDisk(fromRod: 0, toRod: 1)
 moveTopDisk(fromRod: 0, toRod: 2)
 moveTopDisk(fromRod: 1, toRod: 2)

@@ -10,6 +10,8 @@
      
  Now that's what I call a nice backstory! 😎
  
+---
+ 
  # Objective and Rules
  
  In order to solve the **Tower of Hanoi**, your **goal** is:
@@ -22,6 +24,8 @@
  4. Disks can be placed on empty rods.
  
  Don't worry, neither will your iPad stop working nor will the world end when you move the last piece! 😅
+ 
+---
  
  # Interacting with the Puzzle
  

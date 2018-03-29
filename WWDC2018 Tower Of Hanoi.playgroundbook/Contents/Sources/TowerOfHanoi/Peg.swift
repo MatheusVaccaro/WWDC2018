@@ -47,11 +47,11 @@ class Peg {
         return node.position.y - Float(height / 2)
     }
     
-    private static let selectedSound: String = "Menu3B.wav"
-    private static let deselectedSound: String = "Menu3B.wav"
-    private static let moveSound: String = "Menu3B.wav"         //0.9 seconds
-    private static let moveBackSound: String = "Menu3B.wav"     //0.9 seconds
-    private static let invalidMoveSound: String = "Menu3B.wav"  //0.3 seconds
+    private static let selectedSound: String = "diskSelect.wav"
+    private static let deselectedSound: String = "diskDeselect.wav"
+    private static let moveSound: String = "moveDisk.wav"               //0.9 seconds
+    private static let moveBackSound: String = "moveDiskBack.wav"           //0.9 seconds
+    private static let invalidMoveSound: String = "invalidMove.wav" //0.3 seconds
     
     init(forNumberOfDisks nDisks: Int, base: Base, index: Int) {
         self.isSelected = false
@@ -153,10 +153,13 @@ class Peg {
         
         let waitAction = SCNAction.wait(duration: duration)
         
+        let invalidMoveAudioSource = SCNAudioSource(fileNamed: Peg.invalidMoveSound)!
+        let invalidMoveSoundAction = SCNAction.playAudio(invalidMoveAudioSource, waitForCompletion: false)
+        
         let shakeLeftAction = SCNAction.moveBy(x: -0.5, y: 0, z: 0, duration: shakeDuration)
         let goToMiddle = SCNAction.move(to: SCNVector3(destination.node.position.x, destinationTopDisk.relativeMaxY + diskOffset, destination.node.position.z), duration: shakeDuration)
         let shakeRightAction = SCNAction.moveBy(x: +0.5, y: 0, z: 0, duration: shakeDuration)
-        let shakeAction = SCNAction.sequence([shakeLeftAction, goToMiddle, shakeRightAction, goToMiddle, shakeLeftAction, goToMiddle])
+        let shakeAction = SCNAction.sequence([SCNAction.group([shakeLeftAction, invalidMoveSoundAction]), goToMiddle, SCNAction.group([shakeRightAction, invalidMoveSoundAction]), goToMiddle])
         
         let destinationLiftVector = SCNVector3(destination.node.position.x, destination.relativeMaxY + heightOffset, destination.node.position.z)
         let destinationLiftAction = SCNAction.move(to: destinationLiftVector, duration: duration)
@@ -180,11 +183,8 @@ class Peg {
         let moveBackSequence = SCNAction.sequence([destinationLiftAction, moveBackAction, destinationLowerAction])
         let moveBackGroup = SCNAction.group([moveBackSoundAction, moveBackSequence])
         
-        let invalidMoveAudioSource = SCNAudioSource(fileNamed: Peg.invalidMoveSound)!
-        let invalidMoveSoundAction = SCNAction.playAudio(invalidMoveAudioSource, waitForCompletion: false)
-        let invalidMoveGroup = SCNAction.group([invalidMoveSoundAction, shakeAction])
         
-        let actionSequence = SCNAction.sequence([moveGroup, waitAction, invalidMoveGroup, waitAction, moveBackGroup])
+        let actionSequence = SCNAction.sequence([moveGroup, waitAction, shakeAction, waitAction, moveBackGroup])
         
         return actionSequence
     }
