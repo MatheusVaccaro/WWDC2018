@@ -60,7 +60,7 @@ class TowerOfHanoiView: SCNView {
             .moveTopDisk(from: 0, to: 2)
         ]
         
-        MovementSequencer.shared.execute(movements: moves)
+//        MovementSequencer.shared.execute(movements: moves)
     }
     
     private func setupView() {
@@ -81,6 +81,7 @@ class TowerOfHanoiView: SCNView {
     
     private func setupTowerOfHanoi(numberOfDisks nDisks: Int, numberOfPegs nPegs: Int) {
         self.towerOfHanoi = TowerOfHanoi(numberOfDisks: nDisks, numberOfPegs: nPegs)
+        towerOfHanoi.isPlayingBGM = true
         scnScene.rootNode.addChildNode(towerOfHanoi.node)
     }
     

@@ -80,6 +80,7 @@ open class TowerOfHanoiView: SCNView {
     
     private func setupTowerOfHanoi(numberOfDisks nDisks: Int, numberOfPegs nPegs: Int) {
         self.towerOfHanoi = TowerOfHanoi(numberOfDisks: nDisks, numberOfPegs: nPegs)
+        towerOfHanoi.isPlayingBGM = true
         scnScene.rootNode.addChildNode(towerOfHanoi.node)
     }
     
