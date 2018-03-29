@@ -130,6 +130,7 @@ open class TowerOfHanoiView: SCNView {
             if selectedPeg === sourcePeg {
                 //print("Unselecting source peg \(selectedPeg.index)")
                 self.sourcePeg?.isSelected = false
+                self.sourcePeg?.playDeselectedSound()
                 self.sourcePeg = nil
                 return
             }
@@ -147,6 +148,7 @@ open class TowerOfHanoiView: SCNView {
             if !selectedPeg.diskStack.isEmpty {
                 self.sourcePeg = selectedPeg
                 self.sourcePeg?.isSelected = true
+                self.sourcePeg?.playSelectedSound()
                 //print("Setting peg \(selectedPeg.index) as source peg")
             }
         }
@@ -171,6 +173,7 @@ extension TowerOfHanoiView: MovementSequencerDelegate {
         let check = towerOfHanoiChecker.check()
         if check && !didCompleteTowerOfHanoi {
             numberOfMovesIndicator.didCompleteTowerOfHanoi = check
+            towerOfHanoi.playVictorySound()
             fireworks.play()
         }
         didCompleteTowerOfHanoi = check

@@ -16,6 +16,8 @@ class TowerOfHanoi {
     let initialPegIndex: Int
     let numberOfDisks: Int
     
+    private static let victorySound: String = "Menu3B.wav"
+    
     init(numberOfDisks nDisks: Int, numberOfPegs nPegs: Int, initialPegIndex: Int = 0) {
         self.node = SCNNode()
         self.initialPegIndex = initialPegIndex
@@ -42,6 +44,12 @@ class TowerOfHanoi {
         sourcePeg.moveTopDisk(to: targetPeg) {
             completionHandler?()
         }
+    }
+    
+    func playVictorySound() {
+        let audioSource = SCNAudioSource(fileNamed: TowerOfHanoi.victorySound)!
+        let soundAction = SCNAction.playAudio(audioSource, waitForCompletion: false)
+        node.runAction(soundAction)
     }
     
     private func place(numberOfDisks nDisks: Int, atPeg pegIndex: Int) {

@@ -18,6 +18,8 @@ class Firework {
     let color: UIColor
     let maxFireworkRadius: CGFloat
     
+    private static let fireworkSound: String = "Menu3B.wav"
+    
     init(rootNode: SCNNode, boundingBox: (min: SCNVector3, max: SCNVector3), color: UIColor, maxFireworkRadius: CGFloat) {
         self.rootNode = rootNode
         
@@ -30,8 +32,6 @@ class Firework {
         self.fireworksParticleSystem = SCNParticleSystem(named: particleSystemName, inDirectory: nil)!
     }
     
-    
-    
     func createFireworkAction() -> SCNAction {
         let randomX = Float(arc4random_uniform(UInt32(boundingBox.max.x - boundingBox.min.x))) + boundingBox.min.x
         let randomY = Float(arc4random_uniform(UInt32(boundingBox.max.y - boundingBox.min.y))) + boundingBox.min.y
@@ -42,7 +42,7 @@ class Firework {
         
         let emitterShape = SCNSphere(radius: maxFireworkRadius)
         fireworksParticleSystem.emitterShape = emitterShape
-
+        
         let addFireworkAction = SCNAction.run { [weak self] _ in
             guard let fireworksParticleSystem = self?.fireworksParticleSystem, let node = self?.node else {
                 print("addFireworkAction - RETURNED")
@@ -52,6 +52,11 @@ class Firework {
             self?.rootNode.addChildNode(node)
             self?.node.addParticleSystem(fireworksParticleSystem)
         }
+        
+        let audioSource = SCNAudioSource(fileNamed: Firework.fireworkSound)!
+        let soundAction = SCNAction.playAudio(audioSource, waitForCompletion: false)
+        
+        let fireworkGroup = SCNAction.group([addFireworkAction, soundAction])
         
         let lifeSpan = fireworksParticleSystem.particleLifeSpan
         let waitExplosionAction = SCNAction.wait(duration: TimeInterval(lifeSpan))
@@ -65,7 +70,7 @@ class Firework {
             node.removeFromParentNode()
         }
         
-        let actionSequence = SCNAction.sequence([addFireworkAction, waitExplosionAction, removeFireworkAction])
+        let actionSequence = SCNAction.sequence([fireworkGroup, waitExplosionAction, removeFireworkAction])
         
         return actionSequence
     }
@@ -123,3 +128,4 @@ class FireworkPlayer {
         
     }
 }
+

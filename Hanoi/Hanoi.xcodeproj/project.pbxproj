@@ -26,6 +26,7 @@
 		C27CB03D206586C800B12AB6 /* NumberOfMovesIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27CB03C206586C800B12AB6 /* NumberOfMovesIndicator.swift */; };
 		C27CB0402065AE3300B12AB6 /* smoke.png in Resources */ = {isa = PBXBuildFile; fileRef = C27CB03E2065AE3300B12AB6 /* smoke.png */; };
 		C27CB0412065AE3300B12AB6 /* SmokeParticleSystem.scnp in Resources */ = {isa = PBXBuildFile; fileRef = C27CB03F2065AE3300B12AB6 /* SmokeParticleSystem.scnp */; };
+		C288248A206D3432002C6541 /* Menu3B.wav in Resources */ = {isa = PBXBuildFile; fileRef = C2882489206D3432002C6541 /* Menu3B.wav */; };
 		C2A16F3F20670527004216F1 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = C2A16F3D20670527004216F1 /* spark.png */; };
 		C2A16F4020670527004216F1 /* FireworksParticleSystem.scnp in Resources */ = {isa = PBXBuildFile; fileRef = C2A16F3E20670527004216F1 /* FireworksParticleSystem.scnp */; };
 		C2A16F44206722AB004216F1 /* Firework.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A16F43206722AB004216F1 /* Firework.swift */; };
@@ -54,6 +55,7 @@
 		C27CB03C206586C800B12AB6 /* NumberOfMovesIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberOfMovesIndicator.swift; sourceTree = "<group>"; };
 		C27CB03E2065AE3300B12AB6 /* smoke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smoke.png; sourceTree = "<group>"; };
 		C27CB03F2065AE3300B12AB6 /* SmokeParticleSystem.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = SmokeParticleSystem.scnp; sourceTree = "<group>"; };
+		C2882489206D3432002C6541 /* Menu3B.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Menu3B.wav; sourceTree = "<group>"; };
 		C2A16F3D20670527004216F1 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		C2A16F3E20670527004216F1 /* FireworksParticleSystem.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = FireworksParticleSystem.scnp; sourceTree = "<group>"; };
 		C2A16F43206722AB004216F1 /* Firework.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Firework.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 		C25A2086205F627400633515 /* Hanoi */ = {
 			isa = PBXGroup;
 			children = (
+				C2882489206D3432002C6541 /* Menu3B.wav */,
 				C25A2087205F627400633515 /* AppDelegate.swift */,
 				C25A208D205F627400633515 /* Main.storyboard */,
 				C25A2090205F627400633515 /* Assets.xcassets */,
@@ -209,6 +212,7 @@
 				C25A2091205F627400633515 /* Assets.xcassets in Resources */,
 				C27CB0412065AE3300B12AB6 /* SmokeParticleSystem.scnp in Resources */,
 				C25A208F205F627400633515 /* Main.storyboard in Resources */,
+				C288248A206D3432002C6541 /* Menu3B.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
