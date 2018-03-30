@@ -25,15 +25,6 @@ func executeMoves() {
     let string = PlaygroundValue.string("executeMoves")
     proxy?.send(string)
 }
-
-//func updateLiveView() {
-//    let dict = ["movementSequenceSources" : PlaygroundValue.array(_movementSequenceSources),
-//                "movementSequenceTargers" : PlaygroundValue.array(_movementSequenceTargets),
-//                "numberOfRods" : PlaygroundValue.integer(numberOfRods),
-//                "numberOfDisks" : PlaygroundValue.integer(numberOfDisks)]
-//    proxy?.send(PlaygroundValue.dictionary(dict))
-//}
-
 //#-end-hidden-code
 /*:
  # Play Time!

@@ -67,7 +67,7 @@ open class TowerOfHanoiView: SCNView {
     }
     
     fileprivate func setupView() {
-        showsStatistics = true
+        showsStatistics = false
         allowsCameraControl = true
         autoenablesDefaultLighting = true
         isPlaying = true

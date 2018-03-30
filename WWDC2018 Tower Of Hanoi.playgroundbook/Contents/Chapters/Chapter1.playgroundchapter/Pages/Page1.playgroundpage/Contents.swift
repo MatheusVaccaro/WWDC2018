@@ -1,3 +1,31 @@
+//#-hidden-code
+import PlaygroundSupport
+
+let page = PlaygroundPage.current
+let proxy = page.liveView as? PlaygroundRemoteLiveViewProxy
+
+var numberOfRods = 3
+var numberOfDisks = 3
+
+func updateTower() {
+    let dict = ["title" : PlaygroundValue.string("towerUpdate"),
+                "nRods" : PlaygroundValue.integer(numberOfRods),
+                "nDisks": PlaygroundValue.integer(numberOfDisks)]
+    proxy?.send(PlaygroundValue.dictionary(dict))
+}
+
+func moveTopDisk(fromRod sourceRod: Int, toRod targetRod: Int) {
+    let dict = ["title" : PlaygroundValue.string("moves"),
+                "sourceRod" : PlaygroundValue.integer(sourceRod),
+                "targetRod": PlaygroundValue.integer(targetRod)]
+    proxy?.send(PlaygroundValue.dictionary(dict))
+}
+
+func executeMoves() {
+    let string = PlaygroundValue.string("executeMoves")
+    proxy?.send(string)
+}
+//#-end-hidden-code
 /*:
  # Tower of Hanoi
  
@@ -52,8 +80,8 @@ This example shows the command you can use to move the disk at the top of the fi
 //#-end-editable-code
 
 
-//import PlaygroundSupport
-//
-//let page = PlaygroundPage.current
-//let proxy = page.liveView as? PlaygroundRemoteLiveViewProxy
+//#-hidden-code
+updateTower()
+executeMoves()
+//#-end-hidden-code
 

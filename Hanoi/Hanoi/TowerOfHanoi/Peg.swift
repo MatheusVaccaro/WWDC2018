@@ -73,11 +73,6 @@ class Peg {
     }
     
     func moveTopDisk(to destination: Peg, completionHandler: (() -> Void)? = nil) {
-        guard destination != self else {
-            print("Error. Source and Destination are the same.")
-            completionHandler?()
-            return
-        }
 
         guard let topDisk = diskStack.peek() else {
             print("Error. Could not get top disk.")
@@ -86,8 +81,14 @@ class Peg {
         }
         
         let moveAction: SCNAction
-        if let destinationTopDisk = destination.diskStack.peek(), topDisk.outerRadius > destinationTopDisk.outerRadius {
-            moveAction = createActionToMoveFailure(disk: topDisk, to: destination)
+        if let destinationTopDisk = destination.diskStack.peek() {
+            if topDisk.outerRadius > destinationTopDisk.outerRadius {
+                moveAction = createActionToMoveFailure(disk: topDisk, to: destination)
+            } else if topDisk.outerRadius == destinationTopDisk.outerRadius {
+                moveAction = createActionToMoveInPlace(disk: topDisk)
+            } else {
+                moveAction = createActionToMoveSuccess(disk: topDisk, to: destination)
+            }
         } else {
             moveAction = createActionToMoveSuccess(disk: topDisk, to: destination)
         }
@@ -98,6 +99,32 @@ class Peg {
         topDisk.node.runAction(sequence, completionHandler: completionHandler)
     }
  
+    private func createActionToMoveInPlace(disk: Disk, durationMultiplier: Double = 1) -> SCNAction {
+        let defaultDuration: TimeInterval = 0.3
+        let duration = defaultDuration * durationMultiplier
+        
+        let originalPosition = disk.node.position
+        
+        let heightOffset: Float = Float(disk.height)
+        
+        let liftVector = SCNVector3(node.position.x, relativeMaxY + heightOffset, node.position.z)
+        let liftAction = SCNAction.move(to: liftVector, duration: duration)
+        let moveAudioSource = SCNAudioSource(fileNamed: Peg.moveSound)!
+        let liftSoundAction = SCNAction.playAudio(moveAudioSource, waitForCompletion: false)
+        let liftGroup = SCNAction.group([liftAction, liftSoundAction])
+        
+        let waitAction = SCNAction.wait(duration: duration)
+        
+        let lowerAction = SCNAction.move(to: originalPosition, duration: duration)
+        let moveBackAudioSource = SCNAudioSource(fileNamed: Peg.moveBackSound)!
+        let lowerSoundAction = SCNAction.playAudio(moveBackAudioSource, waitForCompletion: false)
+        let lowerGroup = SCNAction.group([lowerAction, lowerSoundAction])
+        
+        let actionSequence = SCNAction.sequence([liftGroup, waitAction, lowerGroup])
+        
+        return actionSequence
+    }
+    
     private func createActionToMoveSuccess(disk: Disk, to destination: Peg, durationMultiplier: Double = 1) -> SCNAction {
         let defaultDuration: TimeInterval = 0.3
         let duration = defaultDuration * durationMultiplier

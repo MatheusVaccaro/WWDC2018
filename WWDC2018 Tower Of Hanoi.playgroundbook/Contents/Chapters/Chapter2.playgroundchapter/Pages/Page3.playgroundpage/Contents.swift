@@ -1,14 +1,30 @@
 //#-hidden-code
-var _movementSequencerMoves: [Movement] = []
+import PlaygroundSupport
 
-func moveTopDisk(fromRod sourceRod: Int, toRod targetRod: Int) {
-    let move: Movement = Movement.moveTopDisk(from: sourceRod, to: targetRod)
-    _movementSequencerMoves.append(move)
-}
+let page = PlaygroundPage.current
+let proxy = page.liveView as? PlaygroundRemoteLiveViewProxy
 
 var numberOfRods = 4
 var numberOfDisks = 4
 
+func updateTower() {
+    let dict = ["title" : PlaygroundValue.string("towerUpdate"),
+                "nRods" : PlaygroundValue.integer(numberOfRods),
+                "nDisks": PlaygroundValue.integer(numberOfDisks)]
+    proxy?.send(PlaygroundValue.dictionary(dict))
+}
+
+func moveTopDisk(fromRod sourceRod: Int, toRod targetRod: Int) {
+    let dict = ["title" : PlaygroundValue.string("moves"),
+                "sourceRod" : PlaygroundValue.integer(sourceRod),
+                "targetRod": PlaygroundValue.integer(targetRod)]
+    proxy?.send(PlaygroundValue.dictionary(dict))
+}
+
+func executeMoves() {
+    let string = PlaygroundValue.string("executeMoves")
+    proxy?.send(string)
+}
 //#-end-hidden-code
 /*:
  # Solutions
@@ -32,32 +48,8 @@ moveTopDisk(fromRod: 1, toRod: 3)
 moveTopDisk(fromRod: 2, toRod: 3)
 
 //#-hidden-code
-class IntroductionView: TowerOfHanoiView {
-    
-    override func numberOfDisksForTower() -> Int {
-        return numberOfDisks
-    }
-    
-    override func numberOfPegsForTower() -> Int {
-        return numberOfRods
-    }
-    
-    override func setup() {
-        if _movementSequencerMoves.count != 0 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                MovementSequencer.shared.execute(movements: _movementSequencerMoves)
-            }
-        }
-    }
-}
-
-import Foundation
-import PlaygroundSupport
-import SceneKit
-
-let rect = CGRect(x: 0, y: 0, width: 500, height: 600)
-let towerOfHanoiView = IntroductionView(frame: rect)
-PlaygroundSupport.PlaygroundPage.current.liveView = towerOfHanoiView
+updateTower()
+executeMoves()
 //#-end-hidden-code
 
 
