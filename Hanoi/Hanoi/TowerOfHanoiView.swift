@@ -19,6 +19,13 @@ class TowerOfHanoiView: SCNView {
         setup()
     }
     
+    init(frame: CGRect, rods: Int, disks: Int) {
+        self.numberOfDisks = disks
+        self.numberOfRods = rods
+        super.init(frame: frame, options: nil)
+        setup()
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -36,10 +43,13 @@ class TowerOfHanoiView: SCNView {
     
     var fireworks: FireworkPlayer!
     
+    var numberOfDisks: Int! = 3
+    var numberOfRods: Int! = 3
+    
     private func setup() {
         setupView()
         setupScene()
-        setupTowerOfHanoi(numberOfDisks: 3, numberOfPegs: 3)
+        setupTowerOfHanoi(numberOfDisks: numberOfDisks, numberOfPegs: numberOfRods)
         setupTowerOfHanoiChecker()
         setupCamera()
         setupNumberOfMovesIndicator()
@@ -51,16 +61,10 @@ class TowerOfHanoiView: SCNView {
         MovementSequencer.shared.towerOfHanoi = towerOfHanoi
         
         let moves: [Movement] = [
-            .moveTopDisk(from: 0, to: 2),
-            .moveTopDisk(from: 0, to: 1),
-            .moveTopDisk(from: 2, to: 1),
-            .moveTopDisk(from: 0, to: 2),
-            .moveTopDisk(from: 1, to: 0),
-            .moveTopDisk(from: 1, to: 2),
-            .moveTopDisk(from: 0, to: 2)
+            .moveTopDisk(from: 0, to: 0)
         ]
         
-//        MovementSequencer.shared.execute(movements: moves)
+        MovementSequencer.shared.execute(movements: moves)
     }
     
     private func setupView() {

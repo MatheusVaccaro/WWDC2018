@@ -16,14 +16,6 @@ class TowerOfHanoi {
     let initialPegIndex: Int
     let numberOfDisks: Int
     
-    var isPlayingBGM: Bool = false {
-        didSet {
-            isPlayingBGM ? playBGM() : stopBGM()
-        }
-    }
-    
-    private static let backgroundMusic: String = "backgroundMusic.wav"
-    private static let bgmKey: String = "bgmKey"
     private static let victorySound: String = "victory.wav"
     
     init(numberOfDisks nDisks: Int, numberOfPegs nPegs: Int, initialPegIndex: Int = 0) {
@@ -76,19 +68,6 @@ class TowerOfHanoi {
             peg.diskStack.push(disk)
         }
     }
-    
-    private func playBGM() {
-        let audioSource = SCNAudioSource(fileNamed: TowerOfHanoi.backgroundMusic)!
-        audioSource.volume = 0.35
-        let audioAction = SCNAction.playAudio(audioSource, waitForCompletion: true)
-        let repeatForever = SCNAction.repeatForever(audioAction)
-        node.runAction(repeatForever, forKey: TowerOfHanoi.bgmKey)
-    }
-    
-    private func stopBGM() {
-        node.removeAction(forKey: TowerOfHanoi.bgmKey)
-    }
-    
 }
 
 

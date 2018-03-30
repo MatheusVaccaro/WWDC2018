@@ -50,3 +50,10 @@ This example shows the command you can use to move the disk at the top of the fi
 //#-code-completion(description, show, "moveTopDisk(fromRod: Int, toRod: Int)")
 //#-editable-code Tap to enter code
 //#-end-editable-code
+
+
+//import PlaygroundSupport
+//
+//let page = PlaygroundPage.current
+//let proxy = page.liveView as? PlaygroundRemoteLiveViewProxy
+

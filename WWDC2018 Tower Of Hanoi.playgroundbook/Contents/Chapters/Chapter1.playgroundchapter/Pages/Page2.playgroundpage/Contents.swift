@@ -1,3 +1,40 @@
+//#-hidden-code
+import PlaygroundSupport
+
+let page = PlaygroundPage.current
+let proxy = page.liveView as? PlaygroundRemoteLiveViewProxy
+
+var numberOfRods = 3
+var numberOfDisks = 3
+
+func updateTower() {
+    let dict = ["title" : PlaygroundValue.string("towerUpdate"),
+                "nRods" : PlaygroundValue.integer(numberOfRods),
+                "nDisks": PlaygroundValue.integer(numberOfDisks)]
+    proxy?.send(PlaygroundValue.dictionary(dict))
+}
+
+func moveTopDisk(fromRod sourceRod: Int, toRod targetRod: Int) {
+    let dict = ["title" : PlaygroundValue.string("moves"),
+                "sourceRod" : PlaygroundValue.integer(sourceRod),
+                "targetRod": PlaygroundValue.integer(targetRod)]
+    proxy?.send(PlaygroundValue.dictionary(dict))
+}
+
+func executeMoves() {
+    let string = PlaygroundValue.string("executeMoves")
+    proxy?.send(string)
+}
+
+//func updateLiveView() {
+//    let dict = ["movementSequenceSources" : PlaygroundValue.array(_movementSequenceSources),
+//                "movementSequenceTargers" : PlaygroundValue.array(_movementSequenceTargets),
+//                "numberOfRods" : PlaygroundValue.integer(numberOfRods),
+//                "numberOfDisks" : PlaygroundValue.integer(numberOfDisks)]
+//    proxy?.send(PlaygroundValue.dictionary(dict))
+//}
+
+//#-end-hidden-code
 /*:
  # Play Time!
  
@@ -21,18 +58,6 @@ The greater the number of rods, the easier the puzzle gets.
  
  Ahh! And one more thing! If you are wondering what are the moves to solve the Tower of Hanoi, I have compiled some solutions for you in the **Solutions Chapter**. 😉
 */
-//#-hidden-code
-var _movementSequencerMoves: [Movement] = []
-
-func moveTopDisk(fromRod sourceRod: Int, toRod targetRod: Int) {
-    let move: Movement = Movement.moveTopDisk(from: sourceRod, to: targetRod)
-    _movementSequencerMoves.append(move)
-}
-
-var numberOfRods = 3
-var numberOfDisks = 3
-
-//#-end-hidden-code
 //#-code-completion(everything, hide)
 // The number of rods the puzzle will have.
 // Choose a number greater than 3, or the puzzle won't be solvable.
@@ -45,37 +70,12 @@ numberOfDisks = /*#-editable-code*/3/*#-end-editable-code*/
 //#-code-completion(description, show, "moveTopDisk(fromRod: Int, toRod: Int)")
 // Here you can type the commands you want the tower to make, just remember that you can always interact with the puzzle by touching the rods.
 //#-editable-code Tap to enter code
-
 //#-end-editable-code
 
 
 //#-hidden-code
-class IntroductionView: TowerOfHanoiView {
-    
-    override func numberOfDisksForTower() -> Int {
-        return numberOfDisks
-    }
-    
-    override func numberOfPegsForTower() -> Int {
-        return numberOfRods
-    }
-    
-    override func setup() {
-        if _movementSequencerMoves.count != 0 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                MovementSequencer.shared.execute(movements: _movementSequencerMoves)
-            }
-        }
-    }
-}
-
-import Foundation
-import PlaygroundSupport
-import SceneKit
-
-let rect = CGRect(x: 0, y: 0, width: 500, height: 600)
-let towerOfHanoiView = IntroductionView(frame: rect)
-PlaygroundSupport.PlaygroundPage.current.liveView = towerOfHanoiView
+updateTower()
+executeMoves()
 //#-end-hidden-code
 
 

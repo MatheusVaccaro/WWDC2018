@@ -73,7 +73,11 @@ class Peg {
     }
     
     func moveTopDisk(to destination: Peg, completionHandler: (() -> Void)? = nil) {
-        guard destination != self else { return }
+        guard destination != self else {
+            print("Error. Source and Destination are the same.")
+            completionHandler?()
+            return
+        }
 
         guard let topDisk = diskStack.peek() else {
             print("Error. Could not get top disk.")

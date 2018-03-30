@@ -73,7 +73,11 @@ class Peg {
     }
     
     func moveTopDisk(to destination: Peg, completionHandler: (() -> Void)? = nil) {
-        guard destination != self else { return }
+        guard destination != self else {
+            print("Error. Source and Destination are the same.")
+            completionHandler?()
+            return
+        }
         
         guard let topDisk = diskStack.peek() else {
             print("Error. Could not get top disk.")
@@ -165,7 +169,8 @@ class Peg {
         let destinationLiftAction = SCNAction.move(to: destinationLiftVector, duration: duration)
         
         // -height because the disk was lifted by it's height
-        let initialDiskPosition = SCNVector3(disk.node.position.x, disk.node.position.y - Float(disk.height), disk.node.position.z)
+//        let initialDiskPosition = SCNVector3(disk.node.position.x, disk.node.position.y - Float(disk.height), disk.node.position.z)
+        let initialDiskPosition = SCNVector3(disk.node.position.x, Float(CGFloat(diskStack.count) * disk.height), disk.node.position.z)
         let moveBackVector = SCNVector3(initialDiskPosition.x, relativeMaxY + heightOffset, initialDiskPosition.z)
         let moveBackAction = SCNAction.move(to: moveBackVector, duration: duration)
         

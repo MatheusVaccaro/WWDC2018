@@ -8,14 +8,18 @@
 
 import Foundation
 import SceneKit
+import PlaygroundSupport
 
 open class TowerOfHanoiView: SCNView {
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
     public override init(frame: CGRect, options: [String : Any]? = nil) {
         super.init(frame: frame, options: options)
+        _setup()
+    }
+    
+    public init(frame: CGRect, numberOfDisks: Int, numberOfRods: Int) {
+        self.numberOfDisks = numberOfDisks
+        self.numberOfRods = numberOfRods
+        super.init(frame: frame, options: nil)
         _setup()
     }
     
@@ -36,59 +40,64 @@ open class TowerOfHanoiView: SCNView {
     
     var fireworks: FireworkPlayer!
     
-    open func numberOfDisksForTower() -> Int {
-        return 3
+    var numberOfDisks: Int! = 3
+    var numberOfRods: Int! = 3
+    
+    var soundNode: SCNNode!
+    var isPlayingBGM: Bool = false {
+        didSet {
+            isPlayingBGM ? playBGM() : stopBGM()
+        }
     }
     
-    open func numberOfPegsForTower() -> Int {
-        return 3
-    }
-    
-    open func setup() {
-        
-    }
+    private static let backgroundMusic: String = "backgroundMusic.wav"
+    private static let bgmKey: String = "bgmKey"
     
     private func _setup() {
         setupView()
         setupScene()
-        setupTowerOfHanoi(numberOfDisks: numberOfDisksForTower(), numberOfPegs: numberOfPegsForTower())
+        setupBGM()
+        setupTowerOfHanoi(numberOfDisks: numberOfDisks, numberOfPegs: numberOfRods)
         setupTowerOfHanoiChecker()
         setupCamera()
         setupNumberOfMovesIndicator()
         setupTapRecognizer()
         setupMovementSequencer()
         setupFireworks()
-        
-        setup()
     }
     
-    private func setupView() {
+    fileprivate func setupView() {
         showsStatistics = true
         allowsCameraControl = true
         autoenablesDefaultLighting = true
         isPlaying = true
     }
     
-    private func setupScene() {
+    fileprivate func setupScene() {
         scnScene = SCNScene(named: "SkyScene.scn")
         scene = scnScene
     }
     
-    private func setupNumberOfMovesIndicator() {
+    fileprivate func setupBGM() {
+        soundNode = SCNNode()
+        scnScene.rootNode.addChildNode(soundNode)
+        isPlayingBGM = true
+    }
+    
+    fileprivate func setupNumberOfMovesIndicator() {
         self.numberOfMovesIndicator = NumberOfMovesIndicator(towerOfHanoi: self.towerOfHanoi)
     }
     
-    private func setupTowerOfHanoi(numberOfDisks nDisks: Int, numberOfPegs nPegs: Int) {
+    fileprivate func setupTowerOfHanoi(numberOfDisks nDisks: Int, numberOfPegs nPegs: Int) {
         self.towerOfHanoi = TowerOfHanoi(numberOfDisks: nDisks, numberOfPegs: nPegs)
-        towerOfHanoi.isPlayingBGM = true
         scnScene.rootNode.addChildNode(towerOfHanoi.node)
     }
     
-    private func setupTowerOfHanoiChecker() {
+    fileprivate func setupTowerOfHanoiChecker() {
         self.towerOfHanoiChecker = TowerOfHanoiChecker(towerOfHanoi: self.towerOfHanoi)
     }
     
-    private func setupCamera() {
+    fileprivate func setupCamera() {
         cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
         cameraNode.position = cameraPositionToSeeObject(withWidth: towerOfHanoi.base.width)
@@ -96,7 +105,7 @@ open class TowerOfHanoiView: SCNView {
         scnScene.rootNode.addChildNode(cameraNode)
     }
     
-    private func cameraPositionToSeeObject(withWidth width: CGFloat) -> SCNVector3 {
+    fileprivate func cameraPositionToSeeObject(withWidth width: CGFloat) -> SCNVector3 {
         let optimalHeightAndWidth: CGFloat = 10
         let optimalObjectWidth: CGFloat = 19.5
         
@@ -104,17 +113,17 @@ open class TowerOfHanoiView: SCNView {
         return SCNVector3(0, targetHeightAndWidth + 2, targetHeightAndWidth - 1)
     }
     
-    private func setupTapRecognizer() {
+    fileprivate func setupTapRecognizer() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         addGestureRecognizer(tapGesture)
     }
     
-    private func setupMovementSequencer() {
+    fileprivate func setupMovementSequencer() {
         MovementSequencer.shared.delegate = self
         MovementSequencer.shared.towerOfHanoi = towerOfHanoi
     }
     
-    private func setupFireworks() {
+    fileprivate func setupFireworks() {
         let basePosition = towerOfHanoi.base.node.position
         let boundingBoxMin = SCNVector3(basePosition.x - Float(towerOfHanoi.base.width / 2),
                                         basePosition.y + Float(towerOfHanoi.base.height + towerOfHanoi.pegs[0].height),
@@ -167,6 +176,18 @@ open class TowerOfHanoiView: SCNView {
             updateManipulatablePegs(touchedHitbox: hitbox)
         }
     }
+    
+    private func playBGM() {
+        let audioSource = SCNAudioSource(fileNamed: TowerOfHanoiView.backgroundMusic)!
+        audioSource.volume = 0.35
+        let audioAction = SCNAction.playAudio(audioSource, waitForCompletion: true)
+        let repeatForever = SCNAction.repeatForever(audioAction)
+        soundNode.runAction(repeatForever, forKey: TowerOfHanoiView.bgmKey)
+    }
+    
+    private func stopBGM() {
+        soundNode.removeAction(forKey: TowerOfHanoiView.bgmKey)
+    }
 }
 
 extension TowerOfHanoiView: MovementSequencerDelegate {
@@ -181,8 +202,74 @@ extension TowerOfHanoiView: MovementSequencerDelegate {
     }
     
     func willExecuteMovement(_ movement: Movement) {
-        if !numberOfMovesIndicator.didCompleteTowerOfHanoi {
+        guard case let .moveTopDisk(source, target) = movement else { return }
+        let sourceRod = towerOfHanoi.pegs[source]
+        if !numberOfMovesIndicator.didCompleteTowerOfHanoi && sourceRod.diskStack.count != 0 && source != target {
             numberOfMovesIndicator.numberOfMoves += 1
         }
     }
 }
+
+var movementSequence: [Movement] = []
+extension TowerOfHanoiView: PlaygroundLiveViewMessageHandler {
+    
+    public func receive(_ message: PlaygroundValue) {
+        switch message {
+        case .dictionary:
+            guard case let .dictionary(dict) = message else { return }
+            guard case let .string(title)? = dict["title"] else { return }
+            if title == "moves" {
+                guard case let .integer(sourceRod)? = dict["sourceRod"] else { return }
+                guard case let .integer(targetRod)? = dict["targetRod"] else { return }
+                movementSequence.append(Movement.moveTopDisk(from: sourceRod, to: targetRod))
+            } else if title == "towerUpdate" {
+                guard case let .integer(nRods)? = dict["nRods"] else { return }
+                guard case let .integer(nDisks)? = dict["nDisks"] else { return }
+                if nRods != towerOfHanoi.pegs.count || nDisks != towerOfHanoi.numberOfDisks {
+                    self.numberOfRods = nRods
+                    self.numberOfDisks = nDisks
+                    
+                    towerOfHanoi.node.removeAllActions()
+                    towerOfHanoi.node.removeFromParentNode()
+                    towerOfHanoi = nil
+                    sourcePeg = nil
+                    targetPeg = nil
+                    cameraNode.removeFromParentNode()
+
+                    setupTowerOfHanoi(numberOfDisks: numberOfDisks, numberOfPegs: numberOfRods)
+                    setupTowerOfHanoiChecker()
+                    setupCamera()
+                    setupNumberOfMovesIndicator()
+                    setupTapRecognizer()
+                    setupMovementSequencer()
+                    setupFireworks()
+                }
+            }
+            
+        case .string:
+            guard case let .string(command) = message else { return }
+            if command == "executeMoves" {
+                towerOfHanoi.node.removeAllActions()
+                towerOfHanoi.node.removeFromParentNode()
+                towerOfHanoi = nil
+                sourcePeg = nil
+                targetPeg = nil
+                
+                setupTowerOfHanoi(numberOfDisks: numberOfDisks, numberOfPegs: numberOfRods)
+                setupTowerOfHanoiChecker()
+                setupNumberOfMovesIndicator()
+                setupTapRecognizer()
+                setupMovementSequencer()
+                setupFireworks()
+                
+                MovementSequencer.shared.execute(movements: movementSequence)
+                movementSequence = []
+            }
+        default:
+            return
+        }
+        
+    }
+
+}
+
