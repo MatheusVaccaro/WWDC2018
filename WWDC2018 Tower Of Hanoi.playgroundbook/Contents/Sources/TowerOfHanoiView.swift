@@ -179,7 +179,7 @@ open class TowerOfHanoiView: SCNView {
     
     private func playBGM() {
         let audioSource = SCNAudioSource(fileNamed: TowerOfHanoiView.backgroundMusic)!
-        audioSource.volume = 0.35
+        audioSource.volume = 1
         let audioAction = SCNAction.playAudio(audioSource, waitForCompletion: true)
         let repeatForever = SCNAction.repeatForever(audioAction)
         soundNode.runAction(repeatForever, forKey: TowerOfHanoiView.bgmKey)
@@ -263,6 +263,9 @@ extension TowerOfHanoiView: PlaygroundLiveViewMessageHandler {
                 setupFireworks()
                 
                 MovementSequencer.shared.execute(movements: movementSequence)
+                movementSequence = []
+            }
+            if command == "clearMovementQueue" {
                 movementSequence = []
             }
         default:
