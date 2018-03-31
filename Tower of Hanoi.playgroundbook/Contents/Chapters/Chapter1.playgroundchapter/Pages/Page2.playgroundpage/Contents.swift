@@ -66,7 +66,7 @@ numberOfRods = /*#-editable-code*/3/*#-end-editable-code*/
 numberOfDisks = /*#-editable-code*/3/*#-end-editable-code*/
 
 //#-code-completion(description, show, "moveTopDisk(fromRod: Int, toRod: Int)")
-// Here you can type the commands you want the tower to make, just remember that you can always interact with the puzzle by touching the rods.
+// Here you can type the commands you want the tower to make, just remember that you can interact with the puzzle by touching the rods too.
 //#-editable-code Tap to enter code
 //#-end-editable-code
 

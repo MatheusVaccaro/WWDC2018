@@ -39,7 +39,7 @@ clearMovementQueue()
  In this page you'll learn the moves you need to make in order to solve the Tower of Hanoi puzzle with **4 rods** and a **stack of 4 disks**.
  
  - Note:
- There can be more than one solution for the puzzle based on its configuration.
+ There can be more than one solution for the puzzle based on its [configuration](glossary://configuration).
  
  Tap "Run My Code" to see what the solution looks like.
 */

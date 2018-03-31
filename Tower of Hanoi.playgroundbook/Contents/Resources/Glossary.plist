@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Terms</key>
+	<dict>
+		<key>puzzle</key>
+		<dict>
+			<key>Title</key>
+			<string>Puzzle</string>
+			<key>Definition</key>
+			<string>A game, toy, or problem designed to test ingenuity or knowledge.</string>
+		</dict>
+		<key>descending_order</key>
+		<dict>
+			<key>Definition</key>
+			<string>Numbers are said to be in descending order when they are arranged from the largest to the smallest number.
+Exemple: Numbers 3, 2 and 1 are arranged in descending order.</string>
+			<key>Title</key>
+			<string>Descending Order</string>
+		</dict>
+		<key>initial_rod</key>
+		<dict>
+			<key>Definition</key>
+			<string>The rod in the far left side.</string>
+			<key>Title</key>
+			<string>Initial Rod</string>
+		</dict>
+		<key>configuration</key>
+		<dict>
+			<key>Title</key>
+			<string>Tower of Hanoi Configuration</string>
+			<key>Definition</key>
+			<string>The number of rods and stack disk size of the Tower of Hanoi.</string>
+		</dict>
+		<key>command</key>
+		<dict>
+			<key>Title</key>
+			<string>Command</string>
+			<key>Definition</key>
+			<string>Code that tells an application to perform a specific action.</string>
+		</dict>
+	</dict>
+</dict>
+</plist>
