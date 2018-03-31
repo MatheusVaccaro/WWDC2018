@@ -25,6 +25,13 @@ func executeMoves() {
     let string = PlaygroundValue.string("executeMoves")
     proxy?.send(string)
 }
+
+func clearMovementQueue() {
+    let string = PlaygroundValue.string("clearMovementQueue")
+    proxy?.send(string)
+}
+
+clearMovementQueue()
 //#-end-hidden-code
 /*:
  # Play Time!

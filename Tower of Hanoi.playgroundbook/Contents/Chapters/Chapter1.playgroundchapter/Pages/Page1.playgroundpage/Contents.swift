@@ -38,7 +38,7 @@ clearMovementQueue()
  
  Wait a minute... Tower of Who? Who is Hanoi? Why does he have a tower? Don't worry, we'll learn about that in this playground!
      
- **Tower of Hanoi** is a puzzle invented by a French mathematician called Édouard Lucas in 1883, which consists of a **number of rods** and a **stack of disks** in ascending order.
+ **Tower of Hanoi** is a puzzle invented by a French mathematician called Édouard Lucas in 1883, which consists of a **number of rods** and a **stack of disks** in descending order.
  
  * Callout(Story Time):
  Legends say this puzzle was inspired from a story about a temple in Hanoi (Vietnam) which contains a large room with 3 time-worn rods surrounded by 64 golden disk. The monks of the temple have been moving these disk according to an ancient prophecy and, when the last move of the puzzle is made, the world will end. 😱
